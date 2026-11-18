@@ -1,4 +1,4 @@
-"""Run the phase-2 experiments one at a time, with cached intermediate results.
+"""Run the phase-2 and phase-3 experiments one at a time, with cached intermediate results.
 
 Usage (from ids-fisel-pfi/):
     .venv/bin/python run_experiments.py rank            # FI and PFI rankings, 5 seeds
@@ -10,8 +10,16 @@ Usage (from ids-fisel-pfi/):
     .venv/bin/python run_experiments.py dedup
     .venv/bin/python run_experiments.py tables
     .venv/bin/python run_experiments.py figures
-    .venv/bin/python run_experiments.py all
+    .venv/bin/python run_experiments.py all             # phase 2 and phase 3
     .venv/bin/python run_experiments.py timing          # quick runtime estimate
+
+Phase 3:
+    .venv/bin/python run_experiments.py mipca           # MI-SEL and PCA-SEL k-sweep, 5 seeds
+    .venv/bin/python run_experiments.py balanced        # class_weight="balanced", FI/PFI k=8
+    .venv/bin/python run_experiments.py smote           # optional: SMOTE on training data only
+    .venv/bin/python run_experiments.py hsel            # optional: homogeneous SEL (3 DTs)
+    .venv/bin/python run_experiments.py ambiguous       # ambiguous vector tables
+    .venv/bin/python run_experiments.py phase3          # all phase-3 experiments, tables, figures
 
 Every run is cached as JSON in results/cache/runs/ and every ranking as CSV in
 results/cache/rankings/. A cached config is never re-run unless --force.
@@ -28,12 +36,20 @@ from functools import lru_cache
 import pandas as pd
 from sklearn.exceptions import ConvergenceWarning
 
-from src import config, data, evaluate, models, selection
+from src import ambiguity, config, data, evaluate, models, selection
 
 CACHE_DIR = config.RESULTS_DIR / "cache"
 RUNS_DIR = CACHE_DIR / "runs"
 RANK_DIR = CACHE_DIR / "rankings"
-METHODS = ("FI", "PFI")
+METHODS = ("FI", "PFI")            # phase-2 experiments iterate over these only
+EXT_METHODS = ("MI", "PCA")        # phase-3 k-sweep
+# Non-default variants (phase 3). Each one is its own key, so the phase-2
+# tables, which filter on variant="clean", never see these runs.
+#   balanced        class_weight="balanced" on LR and DT inside SEL
+#   unweighted_ref  re-run of the unweighted SEL that also records the
+#                   prediction for the ambiguous vector (reference for balanced)
+#   smote           SMOTE on the training data, imblearn Pipeline
+#   homogeneous     HSEL: three DTs as base learners (model="HSEL")
 K_ALL = "all"
 K8 = 8
 
@@ -70,6 +86,8 @@ def get_ranking(method: str, seed: int, dedup: bool = False) -> pd.DataFrame:
         df = selection.rank_fi(s.X_fit, s.y_fit, seed)
     elif method == "PFI":
         df = selection.rank_pfi(s.X_fit, s.y_fit, s.X_val, s.y_val, seed)
+    elif method == "MI":
+        df = selection.rank_mi(s.X_fit, s.y_fit, seed)
     else:
         raise ValueError(method)
     RANK_DIR.mkdir(parents=True, exist_ok=True)
@@ -82,6 +100,12 @@ def get_ranking(method: str, seed: int, dedup: bool = False) -> pd.DataFrame:
 def ranking_time(method: str, seed: int, dedup: bool = False) -> float:
     path = RANK_DIR / f"{method}_seed{seed}_dedup{int(dedup)}.json"
     return json.loads(path.read_text())["ranking_time_s"]
+
+
+@lru_cache(maxsize=1)
+def get_ambiguous_vector():
+    X, y = get_data(False)
+    return ambiguity.main_ambiguous_vector(X, y)
 
 
 # ---------------------------------------------------------------- runs
@@ -99,7 +123,7 @@ def _lr_iterations(fitted) -> int | None:
         lrs = [fitted["lr"]]
     else:
         est = fitted.named_steps["model"]
-        if hasattr(est, "named_estimators_"):
+        if hasattr(est, "named_estimators_") and "lr" in est.named_estimators_:
             lrs = [est.named_estimators_["lr"]]
         elif est.__class__.__name__ == "LogisticRegression":
             lrs = [est]
@@ -117,9 +141,14 @@ def run(model="SEL", method="FI", k=K8, seed=config.MAIN_SEED, dedup=False,
         return json.loads(path.read_text())
 
     s = get_split(seed, dedup)
+    pca_k = None
     if k == K_ALL:
+        # Shared no-reduction baseline for every method, PCA included.
         indices, features = None, list(s.X_train.columns)
         method_out = "ALL"
+    elif method == "PCA":
+        indices, features, pca_k = None, [f"PC{i + 1}" for i in range(k)], k
+        method_out = "PCA"
     else:
         ranking = get_ranking(method, seed, dedup)
         indices = ranking["column_index"].iloc[:k].tolist()
@@ -137,11 +166,21 @@ def run(model="SEL", method="FI", k=K8, seed=config.MAIN_SEED, dedup=False,
             rec["size_bytes"] = evaluate.pipeline_size_bytes(res.pipeline)
             fitted = res.pipeline
         else:
-            est = (models.make_sel(seed, stack_method) if model == "SEL"
-                   else models.make_single(model, seed))
-            pipe = models.make_pipeline(est, indices)
+            if model == "SEL":
+                cw = "balanced" if variant == "balanced" else None
+                est = models.make_sel(seed, stack_method, class_weight=cw)
+            elif model == "HSEL":
+                est = models.make_hsel(seed)
+            else:
+                est = models.make_single(model, seed)
+            pipe = models.make_pipeline(est, indices, pca_components=pca_k,
+                                        smote_seed=seed if variant == "smote" else None,
+                                        seed=seed)
             rec = evaluate.fit_and_evaluate(pipe, s.X_train, s.y_train, s.X_test, s.y_test)
             fitted = pipe
+            if not dedup:
+                # Predicted class of the main ambiguous vector (all-zero vector, Q44).
+                rec["ambiguous_vector_pred"] = str(pipe.predict(get_ambiguous_vector())[0])
     n_conv = sum(issubclass(w.category, ConvergenceWarning) for w in caught)
 
     rec.update(
@@ -204,6 +243,52 @@ def exp_dedup(seeds):
             run("SEL", m, K8, seed, dedup=True)
 
 
+# ---------------------------------------------------------------- phase 3
+
+def exp_mipca(seeds):
+    """MI-SEL and PCA-SEL k-sweep. k=all is the shared phase-2 baseline row."""
+    for seed in seeds:
+        for k in config.K_VALUES:
+            for m in EXT_METHODS:
+                run("SEL", m, k, seed)
+
+
+def exp_balanced(seeds):
+    for seed in seeds:
+        for m in METHODS:
+            run("SEL", m, K8, seed, variant="balanced")
+            run("SEL", m, K8, seed, variant="unweighted_ref")
+
+
+def exp_smote(seeds):
+    for seed in seeds:
+        for m in METHODS:
+            run("SEL", m, K8, seed, variant="smote")
+
+
+def exp_hsel(seeds):
+    for seed in seeds:
+        for m in METHODS:
+            run("HSEL", m, K8, seed, variant="homogeneous")
+
+
+def exp_ambiguous():
+    X, y = get_data(False)
+    config.TABLES_DIR.mkdir(parents=True, exist_ok=True)
+    ambiguity.ambiguous_vector_table(X, y).to_csv(config.TABLES_DIR / "ambiguous_vector.csv", index=False)
+    ambiguity.ambiguous_summary_table(X, y).to_csv(
+        config.TABLES_DIR / "ambiguous_vectors_summary.csv", index=False)
+    parts = []
+    for m in METHODS:
+        top8 = get_ranking(m, config.MAIN_SEED)["feature"].iloc[:K8].tolist()
+        t = ambiguity.projected_vector_table(X, y, top8)
+        parts.append(t.rename(columns={"rows_on_vector_projected": f"rows_on_vector_{m}_top8"}).set_index(
+            ["class", "rows_on_vector_42", "class_total_rows"]))
+    pd.concat(parts, axis=1).reset_index().to_csv(
+        config.TABLES_DIR / "ambiguous_vector_top8.csv", index=False)
+    log("ambiguous vector tables written")
+
+
 def exp_timing():
     """Time one all-features SEL fit and one k=8 SEL fit (not cached)."""
     s = get_split(config.MAIN_SEED, False)
@@ -225,7 +310,8 @@ def main(argv=None):
     global FORCE
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("command", choices=["rank", "ksweep", "single", "leaky", "stack", "dedup",
-                                       "tables", "figures", "all", "timing"])
+                                       "mipca", "balanced", "smote", "hsel", "ambiguous",
+                                       "phase3", "tables", "figures", "all", "timing"])
     p.add_argument("--seeds", type=int, nargs="+", default=config.SEEDS)
     p.add_argument("--force", action="store_true", help="ignore the cache")
     a = p.parse_args(argv)
@@ -248,12 +334,25 @@ def main(argv=None):
         exp_stack(seeds)
     if cmd in ("dedup", "all"):
         exp_dedup(seeds)
-    if cmd in ("tables", "all"):
+    if cmd in ("mipca", "phase3", "all"):
+        exp_mipca(seeds)
+    if cmd in ("balanced", "phase3", "all"):
+        exp_balanced(seeds)
+    if cmd in ("smote", "phase3", "all"):
+        exp_smote(seeds)
+    if cmd in ("hsel", "phase3", "all"):
+        exp_hsel(seeds)
+    if cmd in ("ambiguous", "phase3", "all"):
+        exp_ambiguous()
+    if cmd in ("tables", "phase3", "all"):
         from src import tables
         tables.build_all()
-    if cmd in ("figures", "all"):
+    if cmd in ("figures", "phase3", "all"):
         from src import figures
         figures.build_all()
+    if cmd in ("phase3", "all"):
+        from src import summary
+        summary.main()
     log(f"finished '{cmd}' in {time.perf_counter() - t0:.0f}s")
 
 

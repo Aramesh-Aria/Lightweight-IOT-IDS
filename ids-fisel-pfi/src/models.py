@@ -1,4 +1,5 @@
 """Model factories: SEL, single models, and the possibly-leaky SEL of Algorithm 1.
+Phase 3 adds class_weight, PCA, SMOTE and a homogeneous SEL (HSEL).
 
 Every model sits inside Pipeline(MinMaxScaler -> ColumnSelector(top-k) -> model).
 MinMaxScaler outputs an ndarray, so ColumnSelector selects by integer index.
@@ -12,6 +13,7 @@ from dataclasses import dataclass
 
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.decomposition import PCA
 from sklearn.ensemble import StackingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
@@ -37,32 +39,51 @@ class ColumnSelector(BaseEstimator, TransformerMixin):
         return np.asarray(X)[:, list(self.indices)]
 
 
-def make_lr() -> LogisticRegression:
+def make_lr(class_weight=None) -> LogisticRegression:
     # Q34: only max_iter is changed from the scikit-learn defaults.
-    return LogisticRegression(max_iter=1000)
+    # class_weight is set only in the phase-3 class_weight experiment.
+    return LogisticRegression(max_iter=1000, class_weight=class_weight)
 
 
-def make_dt(seed: int) -> DecisionTreeClassifier:
-    return DecisionTreeClassifier(random_state=seed)
+def make_dt(seed: int, class_weight=None, max_depth=None) -> DecisionTreeClassifier:
+    return DecisionTreeClassifier(random_state=seed, class_weight=class_weight, max_depth=max_depth)
 
 
 def make_nb() -> GaussianNB:
     return GaussianNB()
 
 
-def make_sel(seed: int, stack_method: str = "predict") -> StackingClassifier:
+def make_sel(seed: int, stack_method: str = "predict", class_weight=None) -> StackingClassifier:
     """SEL: NB + LR base learners, DT meta-learner, passthrough features.
 
     stack_method="predict" is the main setting (Q42, Table 10 of the paper:
     the meta-learner receives predicted labels). "predict_proba" is a side
     comparison. The meta-learner is trained on 5-fold cross-validated
     predictions of the training data, so this is the leakage-free variant.
+
+    class_weight (phase 3) is passed to LR and DT; GaussianNB has no such
+    parameter and stays unweighted.
     """
     return StackingClassifier(
-        estimators=[("nb", make_nb()), ("lr", make_lr())],
-        final_estimator=make_dt(seed),
+        estimators=[("nb", make_nb()), ("lr", make_lr(class_weight))],
+        final_estimator=make_dt(seed, class_weight),
         passthrough=True,
         stack_method=stack_method,
+        n_jobs=1,
+    )
+
+
+HSEL_DEPTHS = (4, 8, 16)
+
+
+def make_hsel(seed: int) -> StackingClassifier:
+    """Homogeneous SEL (optional, phase 3): three DTs of depth 4, 8 and 16 as
+    base learners, the same DT meta-learner, passthrough, predicted labels."""
+    return StackingClassifier(
+        estimators=[(f"dt{d}", make_dt(seed, max_depth=d)) for d in HSEL_DEPTHS],
+        final_estimator=make_dt(seed),
+        passthrough=True,
+        stack_method="predict",
         n_jobs=1,
     )
 
@@ -77,14 +98,21 @@ def make_single(name: str, seed: int):
     raise ValueError(f"Unknown model: {name}")
 
 
-def make_pipeline(model, indices=None) -> Pipeline:
-    return Pipeline(
-        [
-            ("scaler", MinMaxScaler()),
-            ("select", ColumnSelector(indices)),
-            ("model", model),
-        ]
-    )
+def make_pipeline(model, indices=None, pca_components=None, smote_seed=None, seed=0):
+    """MinMaxScaler -> ColumnSelector (or PCA) -> [SMOTE] -> model.
+
+    pca_components=k puts PCA(n_components=k) after the scaler in place of the
+    selector (phase 3). smote_seed adds SMOTE before the model; imblearn's
+    Pipeline applies it only in fit, so only training rows are resampled.
+    """
+    reduce = (("pca", PCA(n_components=pca_components, random_state=seed))
+              if pca_components is not None else ("select", ColumnSelector(indices)))
+    steps = [("scaler", MinMaxScaler()), reduce]
+    if smote_seed is None:
+        return Pipeline(steps + [("model", model)])
+    from imblearn.over_sampling import SMOTE
+    from imblearn.pipeline import Pipeline as ImbPipeline
+    return ImbPipeline(steps + [("smote", SMOTE(random_state=smote_seed)), ("model", model)])
 
 
 @dataclass

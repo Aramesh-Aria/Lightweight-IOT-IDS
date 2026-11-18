@@ -6,7 +6,9 @@ validator's lightness band and chroma floor on the paper surface), so the
 chart marks use lifted steps of the same hues. The original navy stays as the
 text ink. Validated with dataviz/scripts/validate_palette.js on #fbf9f4:
 FI, PFI and ALERT pass all six checks (all pairs). MI gets a contrast WARN,
-so MI lines must be direct-labeled.
+so MI lines must be direct-labeled. PCA was gray (#7b8191) but failed the
+normal-vision floor and CVD separation against PFI teal, so it is light
+purple #9b6bc9 (Q50); all four method colors pass with --pairs all.
 
 Labels in figures are English and set in Instrument Sans (fonts/latin).
 """
@@ -39,7 +41,7 @@ METHOD_COLORS = {
     "FI": "#3157a8",    # navy family
     "PFI": "#00897b",   # teal family
     "MI": "#c4842f",    # light orange family (phase 3, direct-label it)
-    "PCA": "#7b8191",   # neutral gray
+    "PCA": "#9b6bc9",   # light purple (Q50: gray failed against PFI teal)
 }
 ALERT = "#b4530b"       # leakage, MITM, differences from the paper
 NEUTRAL = INK_2         # clean / reference series when not a method

@@ -1,0 +1,8 @@
+class,rows_on_vector_42,class_total_rows,rows_on_vector_FI_top8,rows_on_vector_PFI_top8
+Normal,70,24301,150,112
+DDoS,2,49396,28589,2
+Information gathering,459,21148,1899,1733
+MITM,821,1214,821,821
+Injection,454,30632,491,491
+Malware,941,31109,1577,1577
+Total,2747,157800,33527,4736

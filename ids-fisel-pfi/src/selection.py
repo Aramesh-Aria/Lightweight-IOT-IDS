@@ -1,8 +1,9 @@
-"""Feature ranking: FI (ExtraTrees entropy importance) and PFI (permutation importance).
+"""Feature ranking: FI (ExtraTrees entropy importance), PFI (permutation importance)
+and MI (mutual information, phase 3). PCA is not a ranking; it lives in models.py.
 
-Both methods see MinMax-scaled data. The scaler is fit on X_fit only, and both
-rankings are computed from X_fit (PFI is then evaluated on X_val), so FI and
-PFI are compared on equal terms.
+All methods see MinMax-scaled data. The scaler is fit on X_fit only, and every
+ranking is computed from X_fit (PFI is then evaluated on X_val), so the
+methods are compared on equal terms.
 
 Ties (for example the 8 constant columns, which always score 0) are broken by
 the original column order, using a stable sort, so top-k is reproducible.
@@ -13,6 +14,7 @@ import time
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.feature_selection import mutual_info_classif
 from sklearn.inspection import permutation_importance
 from sklearn.preprocessing import MinMaxScaler
 
@@ -51,6 +53,22 @@ def rank_fi(X_fit: pd.DataFrame, y_fit: pd.Series, seed: int) -> pd.DataFrame:
     (Xf,) = _scale(X_fit)
     et = _make_extratrees(seed).fit(Xf, y_fit)
     df = _ranking_frame(X_fit.columns, et.feature_importances_)
+    df.attrs["ranking_time_s"] = time.perf_counter() - t0
+    return df
+
+
+def rank_mi(X_fit: pd.DataFrame, y_fit: pd.Series, seed: int) -> pd.DataFrame:
+    """MI ranking: mutual_info_classif on the scaled X_fit (phase 3).
+
+    All features are treated as continuous (discrete_features=False), as in
+    the support paper's notebook; n_neighbors keeps the default (3). MinMax
+    scaling does not change the per-feature MI, because the estimator rescales
+    each feature internally; it is kept so all rankings see the same input.
+    """
+    t0 = time.perf_counter()
+    (Xf,) = _scale(X_fit)
+    mi = mutual_info_classif(Xf, y_fit, discrete_features=False, random_state=seed, n_jobs=-1)
+    df = _ranking_frame(X_fit.columns, mi)
     df.attrs["ranking_time_s"] = time.perf_counter() - t0
     return df
 

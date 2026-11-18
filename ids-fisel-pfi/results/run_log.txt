@@ -360,3 +360,262 @@
 [12:41:19] run SEL_PFI_k8_seed3_dedup1_clean_predict
 [12:41:24]   F1-macro=92.19  train=5.3s  size=1.59MB  conv_warn=0
 [12:41:24] finished 'dedup' in 551s
+
+===== phase 3 (2026-11-18)
+[13:01:09] run SEL_MI_k5_seed42_dedup0_clean_predict
+[13:01:15]   F1-macro=80.24  train=5.5s  size=2.22MB  conv_warn=0
+[13:01:15] run SEL_PCA_k5_seed42_dedup0_clean_predict
+[13:01:18]   F1-macro=68.34  train=3.0s  size=5.40MB  conv_warn=0
+[13:01:18] run SEL_MI_k6_seed42_dedup0_clean_predict
+[13:01:24]   F1-macro=82.18  train=5.7s  size=1.70MB  conv_warn=0
+[13:01:24] run SEL_PCA_k6_seed42_dedup0_clean_predict
+[13:01:28]   F1-macro=68.53  train=3.7s  size=5.37MB  conv_warn=0
+[13:01:28] run SEL_MI_k7_seed42_dedup0_clean_predict
+[13:01:35]   F1-macro=81.59  train=7.1s  size=2.19MB  conv_warn=0
+[13:01:35] run SEL_PCA_k7_seed42_dedup0_clean_predict
+[13:01:39]   F1-macro=68.67  train=3.4s  size=5.28MB  conv_warn=0
+[13:01:39] run SEL_MI_k10_seed42_dedup0_clean_predict
+[13:01:48]   F1-macro=82.09  train=9.2s  size=2.21MB  conv_warn=0
+[13:01:48] run SEL_PCA_k10_seed42_dedup0_clean_predict
+[13:01:55]   F1-macro=68.43  train=6.3s  size=5.12MB  conv_warn=0
+[13:01:55] run SEL_MI_k15_seed42_dedup0_clean_predict
+[13:02:05]   F1-macro=82.60  train=10.4s  size=2.19MB  conv_warn=0
+[13:02:05] run SEL_PCA_k15_seed42_dedup0_clean_predict
+[13:02:15]   F1-macro=68.98  train=9.4s  size=4.86MB  conv_warn=0
+[13:02:15] run SEL_MI_k20_seed42_dedup0_clean_predict
+[13:02:28]   F1-macro=82.71  train=12.5s  size=2.19MB  conv_warn=0
+[13:02:28] run SEL_PCA_k20_seed42_dedup0_clean_predict
+[13:02:38]   F1-macro=70.45  train=9.9s  size=4.40MB  conv_warn=0
+[13:02:38] ranking MI seed=0 dedup=False
+[13:02:41]   done in 3.1s
+[13:02:41] run SEL_MI_k5_seed0_dedup0_clean_predict
+[13:02:47]   F1-macro=79.89  train=5.2s  size=2.22MB  conv_warn=0
+[13:02:47] run SEL_PCA_k5_seed0_dedup0_clean_predict
+[13:02:50]   F1-macro=68.02  train=2.8s  size=5.42MB  conv_warn=0
+[13:02:50] run SEL_MI_k6_seed0_dedup0_clean_predict
+[13:02:55]   F1-macro=81.61  train=5.7s  size=1.70MB  conv_warn=0
+[13:02:55] run SEL_PCA_k6_seed0_dedup0_clean_predict
+[13:02:59]   F1-macro=68.20  train=3.6s  size=5.37MB  conv_warn=0
+[13:02:59] run SEL_MI_k7_seed0_dedup0_clean_predict
+[13:03:06]   F1-macro=81.29  train=6.1s  size=2.19MB  conv_warn=0
+[13:03:06] run SEL_PCA_k7_seed0_dedup0_clean_predict
+[13:03:09]   F1-macro=68.23  train=3.4s  size=5.31MB  conv_warn=0
+[13:03:09] run SEL_MI_k8_seed0_dedup0_clean_predict
+[13:03:19]   F1-macro=81.31  train=9.2s  size=2.20MB  conv_warn=0
+[13:03:19] run SEL_PCA_k8_seed0_dedup0_clean_predict
+[13:03:22]   F1-macro=68.15  train=3.6s  size=5.22MB  conv_warn=0
+[13:03:22] run SEL_MI_k10_seed0_dedup0_clean_predict
+[13:03:32]   F1-macro=81.75  train=9.0s  size=2.21MB  conv_warn=0
+[13:03:32] run SEL_PCA_k10_seed0_dedup0_clean_predict
+[13:03:38]   F1-macro=68.54  train=6.5s  size=5.13MB  conv_warn=0
+[13:03:38] run SEL_MI_k15_seed0_dedup0_clean_predict
+[13:03:48]   F1-macro=82.15  train=9.9s  size=2.19MB  conv_warn=0
+[13:03:48] run SEL_PCA_k15_seed0_dedup0_clean_predict
+[13:03:58]   F1-macro=68.63  train=9.6s  size=4.89MB  conv_warn=0
+[13:03:58] run SEL_MI_k20_seed0_dedup0_clean_predict
+[13:04:10]   F1-macro=82.04  train=11.8s  size=2.19MB  conv_warn=0
+[13:04:10] run SEL_PCA_k20_seed0_dedup0_clean_predict
+[13:04:20]   F1-macro=70.63  train=10.1s  size=4.41MB  conv_warn=0
+[13:04:21] ranking MI seed=1 dedup=False
+[13:04:22]   done in 1.7s
+[13:04:22] run SEL_MI_k5_seed1_dedup0_clean_predict
+[13:04:27]   F1-macro=80.40  train=4.7s  size=2.23MB  conv_warn=0
+[13:04:27] run SEL_PCA_k5_seed1_dedup0_clean_predict
+[13:04:30]   F1-macro=68.43  train=2.8s  size=5.40MB  conv_warn=0
+[13:04:30] run SEL_MI_k6_seed1_dedup0_clean_predict
+[13:04:37]   F1-macro=82.02  train=6.1s  size=1.70MB  conv_warn=0
+[13:04:37] run SEL_PCA_k6_seed1_dedup0_clean_predict
+[13:04:40]   F1-macro=68.21  train=3.6s  size=5.34MB  conv_warn=0
+[13:04:40] run SEL_MI_k7_seed1_dedup0_clean_predict
+[13:04:46]   F1-macro=81.51  train=5.6s  size=2.20MB  conv_warn=0
+[13:04:46] run SEL_PCA_k7_seed1_dedup0_clean_predict
+[13:04:50]   F1-macro=68.49  train=3.2s  size=5.29MB  conv_warn=0
+[13:04:50] run SEL_MI_k8_seed1_dedup0_clean_predict
+[13:04:59]   F1-macro=81.56  train=8.8s  size=2.20MB  conv_warn=0
+[13:04:59] run SEL_PCA_k8_seed1_dedup0_clean_predict
+[13:05:02]   F1-macro=68.48  train=3.5s  size=5.21MB  conv_warn=0
+[13:05:02] run SEL_MI_k10_seed1_dedup0_clean_predict
+[13:05:13]   F1-macro=81.93  train=10.0s  size=2.21MB  conv_warn=0
+[13:05:13] run SEL_PCA_k10_seed1_dedup0_clean_predict
+[13:05:19]   F1-macro=68.62  train=6.4s  size=5.13MB  conv_warn=0
+[13:05:19] run SEL_MI_k15_seed1_dedup0_clean_predict
+[13:05:29]   F1-macro=82.46  train=10.0s  size=2.19MB  conv_warn=0
+[13:05:29] run SEL_PCA_k15_seed1_dedup0_clean_predict
+[13:05:39]   F1-macro=69.11  train=9.6s  size=4.83MB  conv_warn=0
+[13:05:39] run SEL_MI_k20_seed1_dedup0_clean_predict
+[13:05:52]   F1-macro=82.46  train=12.4s  size=2.19MB  conv_warn=0
+[13:05:52] run SEL_PCA_k20_seed1_dedup0_clean_predict
+[13:06:02]   F1-macro=71.32  train=9.9s  size=4.36MB  conv_warn=0
+[13:06:02] ranking MI seed=2 dedup=False
+[13:06:04]   done in 1.7s
+[13:06:04] run SEL_MI_k5_seed2_dedup0_clean_predict
+[13:06:09]   F1-macro=80.23  train=4.9s  size=2.23MB  conv_warn=0
+[13:06:09] run SEL_PCA_k5_seed2_dedup0_clean_predict
+[13:06:12]   F1-macro=68.04  train=2.8s  size=5.41MB  conv_warn=0
+[13:06:12] run SEL_MI_k6_seed2_dedup0_clean_predict
+[13:06:18]   F1-macro=82.08  train=6.2s  size=1.72MB  conv_warn=0
+[13:06:18] run SEL_PCA_k6_seed2_dedup0_clean_predict
+[13:06:22]   F1-macro=68.02  train=3.8s  size=5.34MB  conv_warn=0
+[13:06:22] run SEL_MI_k7_seed2_dedup0_clean_predict
+[13:06:29]   F1-macro=81.70  train=6.6s  size=2.20MB  conv_warn=0
+[13:06:29] run SEL_PCA_k7_seed2_dedup0_clean_predict
+[13:06:33]   F1-macro=68.30  train=3.2s  size=5.28MB  conv_warn=0
+[13:06:33] run SEL_MI_k8_seed2_dedup0_clean_predict
+[13:06:42]   F1-macro=81.66  train=9.0s  size=2.20MB  conv_warn=0
+[13:06:42] run SEL_PCA_k8_seed2_dedup0_clean_predict
+[13:06:46]   F1-macro=68.27  train=3.5s  size=5.19MB  conv_warn=0
+[13:06:46] run SEL_MI_k10_seed2_dedup0_clean_predict
+[13:06:55]   F1-macro=81.79  train=8.9s  size=2.19MB  conv_warn=0
+[13:06:55] run SEL_PCA_k10_seed2_dedup0_clean_predict
+[13:07:01]   F1-macro=68.19  train=6.5s  size=5.13MB  conv_warn=0
+[13:07:01] run SEL_MI_k15_seed2_dedup0_clean_predict
+[13:07:12]   F1-macro=82.46  train=10.5s  size=2.17MB  conv_warn=0
+[13:07:12] run SEL_PCA_k15_seed2_dedup0_clean_predict
+[13:07:22]   F1-macro=68.54  train=9.4s  size=4.84MB  conv_warn=0
+[13:07:22] run SEL_MI_k20_seed2_dedup0_clean_predict
+[13:07:33]   F1-macro=82.52  train=10.9s  size=2.19MB  conv_warn=0
+[13:07:33] run SEL_PCA_k20_seed2_dedup0_clean_predict
+[13:07:43]   F1-macro=70.29  train=10.2s  size=4.40MB  conv_warn=0
+[13:07:43] ranking MI seed=3 dedup=False
+[13:07:45]   done in 1.7s
+[13:07:45] run SEL_MI_k5_seed3_dedup0_clean_predict
+[13:07:50]   F1-macro=80.23  train=4.9s  size=2.21MB  conv_warn=0
+[13:07:50] run SEL_PCA_k5_seed3_dedup0_clean_predict
+[13:07:53]   F1-macro=68.45  train=2.8s  size=5.40MB  conv_warn=0
+[13:07:53] run SEL_MI_k6_seed3_dedup0_clean_predict
+[13:07:59]   F1-macro=82.15  train=5.8s  size=1.68MB  conv_warn=0
+[13:07:59] run SEL_PCA_k6_seed3_dedup0_clean_predict
+[13:08:03]   F1-macro=68.40  train=3.8s  size=5.38MB  conv_warn=0
+[13:08:03] run SEL_MI_k7_seed3_dedup0_clean_predict
+[13:08:10]   F1-macro=81.90  train=6.6s  size=2.18MB  conv_warn=0
+[13:08:10] run SEL_PCA_k7_seed3_dedup0_clean_predict
+[13:08:13]   F1-macro=68.41  train=3.2s  size=5.26MB  conv_warn=0
+[13:08:13] run SEL_MI_k8_seed3_dedup0_clean_predict
+[13:08:23]   F1-macro=81.95  train=9.1s  size=2.19MB  conv_warn=0
+[13:08:23] run SEL_PCA_k8_seed3_dedup0_clean_predict
+[13:08:27]   F1-macro=68.53  train=3.6s  size=5.22MB  conv_warn=0
+[13:08:27] run SEL_MI_k10_seed3_dedup0_clean_predict
+[13:08:36]   F1-macro=82.34  train=9.4s  size=2.20MB  conv_warn=0
+[13:08:36] run SEL_PCA_k10_seed3_dedup0_clean_predict
+[13:08:43]   F1-macro=68.61  train=6.9s  size=5.13MB  conv_warn=0
+[13:08:43] run SEL_MI_k15_seed3_dedup0_clean_predict
+[13:08:54]   F1-macro=82.86  train=10.6s  size=2.18MB  conv_warn=0
+[13:08:54] run SEL_PCA_k15_seed3_dedup0_clean_predict
+[13:09:04]   F1-macro=69.17  train=9.4s  size=4.86MB  conv_warn=0
+[13:09:04] run SEL_MI_k20_seed3_dedup0_clean_predict
+[13:09:16]   F1-macro=82.77  train=12.1s  size=2.19MB  conv_warn=0
+[13:09:16] run SEL_PCA_k20_seed3_dedup0_clean_predict
+[13:09:26]   F1-macro=70.65  train=10.0s  size=4.41MB  conv_warn=0
+[13:09:26] finished 'mipca' in 498s
+[13:09:28] run SEL_PFI_k8_seed42_dedup0_balanced_predict
+[13:09:34]   F1-macro=80.60  train=4.6s  size=1.63MB  conv_warn=0
+[13:09:34] run SEL_PFI_k8_seed42_dedup0_unweighted_ref_predict
+[13:09:39]   F1-macro=82.26  train=4.9s  size=1.54MB  conv_warn=0
+[13:09:39] run SEL_FI_k8_seed0_dedup0_balanced_predict
+[13:09:49]   F1-macro=68.17  train=9.6s  size=2.39MB  conv_warn=0
+[13:09:49] run SEL_FI_k8_seed0_dedup0_unweighted_ref_predict
+[13:09:57]   F1-macro=81.33  train=7.9s  size=2.19MB  conv_warn=0
+[13:09:57] run SEL_PFI_k8_seed0_dedup0_balanced_predict
+[13:10:03]   F1-macro=80.85  train=6.1s  size=1.62MB  conv_warn=0
+[13:10:03] run SEL_PFI_k8_seed0_dedup0_unweighted_ref_predict
+[13:10:08]   F1-macro=81.92  train=4.7s  size=1.54MB  conv_warn=0
+[13:10:08] run SEL_FI_k8_seed1_dedup0_balanced_predict
+[13:10:18]   F1-macro=67.98  train=10.0s  size=2.40MB  conv_warn=0
+[13:10:18] run SEL_FI_k8_seed1_dedup0_unweighted_ref_predict
+[13:10:27]   F1-macro=81.60  train=8.5s  size=2.20MB  conv_warn=0
+[13:10:27] run SEL_PFI_k8_seed1_dedup0_balanced_predict
+[13:10:33]   F1-macro=80.94  train=5.4s  size=1.63MB  conv_warn=0
+[13:10:33] run SEL_PFI_k8_seed1_dedup0_unweighted_ref_predict
+[13:10:38]   F1-macro=82.38  train=5.1s  size=1.54MB  conv_warn=0
+[13:10:38] run SEL_FI_k8_seed2_dedup0_balanced_predict
+[13:10:48]   F1-macro=68.14  train=9.6s  size=2.41MB  conv_warn=0
+[13:10:48] run SEL_FI_k8_seed2_dedup0_unweighted_ref_predict
+[13:10:56]   F1-macro=81.61  train=8.2s  size=2.20MB  conv_warn=0
+[13:10:56] run SEL_PFI_k8_seed2_dedup0_balanced_predict
+[13:11:01]   F1-macro=80.85  train=4.8s  size=1.63MB  conv_warn=0
+[13:11:01] run SEL_PFI_k8_seed2_dedup0_unweighted_ref_predict
+[13:11:06]   F1-macro=82.27  train=4.9s  size=1.55MB  conv_warn=0
+[13:11:07] run SEL_FI_k8_seed3_dedup0_balanced_predict
+[13:11:16]   F1-macro=68.30  train=9.6s  size=2.40MB  conv_warn=0
+[13:11:16] run SEL_FI_k8_seed3_dedup0_unweighted_ref_predict
+[13:11:25]   F1-macro=81.86  train=8.8s  size=2.19MB  conv_warn=0
+[13:11:25] run SEL_PFI_k8_seed3_dedup0_balanced_predict
+[13:11:31]   F1-macro=80.82  train=5.6s  size=1.62MB  conv_warn=0
+[13:11:31] run SEL_PFI_k8_seed3_dedup0_unweighted_ref_predict
+[13:11:37]   F1-macro=82.40  train=5.5s  size=1.51MB  conv_warn=0
+[13:11:37] finished 'balanced' in 129s
+[13:11:38] run SEL_FI_k8_seed42_dedup0_smote_predict
+[13:12:00]   F1-macro=67.45  train=20.9s  size=5.92MB  conv_warn=0
+[13:12:00] run SEL_PFI_k8_seed42_dedup0_smote_predict
+[13:12:12]   F1-macro=80.33  train=11.3s  size=4.79MB  conv_warn=0
+[13:12:12] run SEL_FI_k8_seed0_dedup0_smote_predict
+[13:12:33]   F1-macro=67.52  train=20.9s  size=5.89MB  conv_warn=0
+[13:12:33] run SEL_PFI_k8_seed0_dedup0_smote_predict
+[13:12:45]   F1-macro=80.71  train=12.3s  size=4.78MB  conv_warn=0
+[13:12:45] run SEL_FI_k8_seed1_dedup0_smote_predict
+[13:13:07]   F1-macro=67.45  train=21.8s  size=5.90MB  conv_warn=0
+[13:13:07] run SEL_PFI_k8_seed1_dedup0_smote_predict
+[13:13:20]   F1-macro=80.37  train=12.8s  size=4.80MB  conv_warn=0
+[13:13:21] run SEL_FI_k8_seed2_dedup0_smote_predict
+[13:13:42]   F1-macro=67.57  train=21.6s  size=5.88MB  conv_warn=0
+[13:13:42] run SEL_PFI_k8_seed2_dedup0_smote_predict
+[13:13:56]   F1-macro=80.71  train=13.8s  size=4.81MB  conv_warn=0
+[13:13:56] run SEL_FI_k8_seed3_dedup0_smote_predict
+[13:14:19]   F1-macro=67.57  train=22.1s  size=5.87MB  conv_warn=0
+[13:14:19] run SEL_PFI_k8_seed3_dedup0_smote_predict
+[13:14:31]   F1-macro=80.56  train=12.1s  size=4.79MB  conv_warn=0
+[13:14:31] finished 'smote' in 173s
+[13:14:32] run HSEL_FI_k8_seed42_dedup0_homogeneous_predict
+Traceback (most recent call last):
+  File "/Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/run_experiments.py", line 352, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/run_experiments.py", line 339, in main
+    exp_hsel(seeds)
+  File "/Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/run_experiments.py", line 272, in exp_hsel
+    run("HSEL", m, K8, seed, variant="homogeneous")
+  File "/Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/run_experiments.py", line 190, in run
+    lr_max_iter_used=_lr_iterations(fitted), convergence_warnings=n_conv,
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/run_experiments.py", line 127, in _lr_iterations
+    lrs = [est.named_estimators_["lr"]]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/.venv/lib/python3.11/site-packages/sklearn/utils/_bunch.py", line 42, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'lr'
+[13:14:54] run HSEL_FI_k8_seed42_dedup0_homogeneous_predict
+[13:14:57]   F1-macro=81.45  train=2.9s  size=2.37MB  conv_warn=0
+[13:14:57] run HSEL_PFI_k8_seed42_dedup0_homogeneous_predict
+[13:14:59]   F1-macro=82.40  train=1.4s  size=1.68MB  conv_warn=0
+[13:14:59] run HSEL_FI_k8_seed0_dedup0_homogeneous_predict
+[13:15:02]   F1-macro=81.33  train=2.9s  size=2.38MB  conv_warn=0
+[13:15:02] run HSEL_PFI_k8_seed0_dedup0_homogeneous_predict
+[13:15:04]   F1-macro=82.08  train=1.4s  size=1.68MB  conv_warn=0
+[13:15:04] run HSEL_FI_k8_seed1_dedup0_homogeneous_predict
+[13:15:07]   F1-macro=81.56  train=2.9s  size=2.37MB  conv_warn=0
+[13:15:07] run HSEL_PFI_k8_seed1_dedup0_homogeneous_predict
+[13:15:09]   F1-macro=82.46  train=1.4s  size=1.70MB  conv_warn=0
+[13:15:09] run HSEL_FI_k8_seed2_dedup0_homogeneous_predict
+[13:15:12]   F1-macro=81.61  train=2.9s  size=2.38MB  conv_warn=0
+[13:15:12] run HSEL_PFI_k8_seed2_dedup0_homogeneous_predict
+[13:15:13]   F1-macro=82.27  train=1.4s  size=1.70MB  conv_warn=0
+[13:15:13] run HSEL_FI_k8_seed3_dedup0_homogeneous_predict
+[13:15:17]   F1-macro=81.56  train=2.9s  size=2.36MB  conv_warn=0
+[13:15:17] run HSEL_PFI_k8_seed3_dedup0_homogeneous_predict
+[13:15:18]   F1-macro=82.36  train=1.4s  size=1.69MB  conv_warn=0
+[13:15:18] finished 'hsel' in 25s
+[13:15:21] ambiguous vector tables written
+[13:15:21] finished 'ambiguous' in 2s
+tables written to /Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/results/tables
+[13:15:23] finished 'tables' in 1s
+figures written to /Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/results/figures
+[13:15:25] finished 'figures' in 1s
+[13:15:57] ambiguous vector tables written
+[13:15:57] finished 'ambiguous' in 3s
+tables written to /Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/results/tables
+[13:30:06] finished 'tables' in 1s
+figures written to /Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/results/figures
+[13:30:08] finished 'figures' in 1s
+figures written to /Users/aria/Documents/Masters/Master_term3/Seminar/ids-fisel-pfi/results/figures
+[14:07:23] finished 'figures' in 1s

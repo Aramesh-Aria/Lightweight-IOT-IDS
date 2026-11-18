@@ -1,4 +1,7 @@
-"""Build the phase-2 CSV tables from the cached runs and rankings.
+"""Build the phase-2 and phase-3 CSV tables from the cached runs and rankings.
+
+Phase-3 tables go to new files; the phase-2 tables filter on variant="clean"
+and methods FI/PFI so the phase-3 runs never change them.
 
 All metrics are percentages. "mean" and "std" are over the 5 seeds
 (config.SEEDS); std uses ddof=1.
@@ -74,13 +77,13 @@ def _k_sort(df):
     return df.assign(_o=df["k"].map(order)).sort_values(["_o"]).drop(columns="_o")
 
 
-def _sweep_rows(runs, seeds=None):
-    """Main SEL (clean, predict, no dedup); the k=all row is shared by FI and PFI."""
+def _sweep_rows(runs, seeds=None, methods=("FI", "PFI")):
+    """Main SEL (clean, predict, no dedup); the k=all row is shared by all methods."""
     base = _select(runs, model="SEL", variant="clean", stack_method="predict", dedup=False)
     if seeds is not None:
         base = base[base["seed"].isin(seeds)]
     parts = []
-    for m in ("FI", "PFI"):
+    for m in methods:
         sub = base[(base["method"] == m) | (base["method"] == "ALL")].copy()
         sub["method"] = m
         parts.append(sub)
@@ -132,6 +135,7 @@ def ksweep_tables(runs):
 def single_models_table(runs):
     base = _select(runs, variant="clean", stack_method="predict", dedup=False)
     base = base[base["k"].isin(["all", "8"]) & base["seed"].isin(config.SEEDS)]
+    base = base[base["method"].isin(["ALL", "FI", "PFI"])]  # MI/PCA rows are phase 3
     agg = _agg(base, ["model", "method", "k"])
     order = {"DT": 0, "LR": 1, "NB": 2, "SEL": 3}
     agg = agg.assign(_o=agg["model"].map(order)).sort_values(["_o", "k", "method"]).drop(columns="_o")
@@ -169,7 +173,7 @@ def per_class_table(runs):
 def leaky_table(runs):
     base = _select(runs, model="SEL", stack_method="predict", dedup=False)
     base = base[base["k"].isin(["all", "8"]) & base["seed"].isin(config.SEEDS)]
-    base = base[base["method"].isin(["ALL", "FI", "PFI"])]
+    base = base[base["method"].isin(["ALL", "FI", "PFI"]) & base["variant"].isin(["clean", "leaky"])]
     agg = _agg(base, ["variant", "method", "k"])
     mitm = base.assign(mitm_recall=base["per_class"].map(lambda p: p["MITM"]["recall"]))
     mr = mitm.groupby(["variant", "method", "k"])["mitm_recall"].agg(["mean", "std"])
@@ -224,6 +228,7 @@ def dedup_table(runs):
 
 
 def paper_vs_ours(runs):
+    runs = runs[runs["variant"].isin(["clean", "leaky"])]
     base = _select(runs, model="SEL", stack_method="predict", dedup=False, method="ALL")
     base = pd.concat([base, _select(runs, model="SEL", stack_method="predict", dedup=False, method="FI", k="8")])
     rows = []
@@ -265,6 +270,146 @@ def paper_vs_ours(runs):
     return df
 
 
+# ---------------------------------------------------------------- phase 3
+
+ALL_METHODS = ("FI", "PFI", "MI", "PCA")
+FOCUS_CLASSES = ("MITM", "Malware", "DDoS")
+
+
+def _ranking_time_mean(method):
+    if method == "PCA":
+        return np.nan  # PCA fit time is inside train_time_s
+    ts = [json.loads((RANK_DIR / f"{method}_seed{s}_dedup0.json").read_text())["ranking_time_s"]
+          for s in config.SEEDS]
+    return float(np.mean(ts))
+
+
+def mi_ranking_table():
+    main = pd.read_csv(RANK_DIR / f"MI_seed{config.MAIN_SEED}_dedup0.csv")
+    a = pd.concat([pd.read_csv(RANK_DIR / f"MI_seed{s}_dedup0.csv").assign(seed=s) for s in config.SEEDS])
+    stats = a.groupby("feature").agg(
+        importance_mean_5seeds=("importance", "mean"),
+        importance_std_5seeds=("importance", lambda x: x.std(ddof=1)),
+        rank_mean_5seeds=("rank", "mean"),
+        times_in_top8=("rank", lambda x: int((x <= 8).sum())),
+    )
+    t = main.merge(stats, left_on="feature", right_index=True)
+    t["in_paper_top8"] = t["feature"].isin(config.PAPER_TOP8)
+    t["constant_column"] = t["feature"].isin(config.CONSTANT_COLUMNS)
+    t.to_csv(T / "mi_ranking.csv", index=False)
+    return t
+
+
+def ksweep_all_methods_tables(runs):
+    """FI, PFI, MI and PCA side by side (new files; phase-2 tables unchanged)."""
+    s42 = _sweep_rows(runs, [config.MAIN_SEED], ALL_METHODS)
+    cols = ["method", "k", "n_features", "accuracy", "precision_macro", "recall_macro", "f1_macro",
+            "train_time_s", "predict_time_s", "size_bytes", "features"]
+    s42 = _k_sort(s42[cols].copy())
+    s42["features"] = s42["features"].map(lambda f: ";".join(f) if len(f) < config.N_FEATURES else "all")
+    s42 = s42.assign(_m=s42["method"].map({m: i for i, m in enumerate(ALL_METHODS)}))
+    s42 = s42.sort_values("_m", kind="stable").drop(columns="_m")
+    s42.to_csv(T / "ksweep_all_methods_seed42.csv", index=False)
+
+    five = _sweep_rows(runs, config.SEEDS, ALL_METHODS)
+    five = five.assign(mitm_recall=five["per_class"].map(lambda p: p["MITM"]["recall"]))
+    agg = _agg(five, ["method", "k"])
+    mr = five.groupby(["method", "k"])["mitm_recall"].agg(
+        mitm_recall_mean="mean", mitm_recall_std=lambda x: x.std(ddof=1))
+    agg = agg.merge(mr, left_on=["method", "k"], right_index=True)
+    agg["ranking_time_s_mean"] = [np.nan if k == "all" else _ranking_time_mean(m)
+                                  for m, k in zip(agg["method"], agg["k"])]
+    agg = _k_sort(agg)
+    agg = agg.assign(_m=agg["method"].map({m: i for i, m in enumerate(ALL_METHODS)}))
+    agg = agg.sort_values("_m", kind="stable").drop(columns="_m")
+    agg.to_csv(T / "ksweep_all_methods_5seeds.csv", index=False)
+    return s42, agg
+
+
+def _with_class_metrics(df):
+    df = df.copy()
+    for c in FOCUS_CLASSES:
+        for met in ("precision", "recall", "f1"):
+            df[f"{c}_{met}"] = df["per_class"].map(lambda p, c=c, met=met: p[c][met])
+    return df
+
+
+def class_weight_table(runs):
+    """Balanced vs unweighted SEL, FI/PFI k=8, 5 seeds."""
+    base = _select(runs, model="SEL", stack_method="predict", dedup=False, k="8")
+    base = base[base["variant"].isin(["unweighted_ref", "balanced"]) & base["method"].isin(["FI", "PFI"])]
+    base = _with_class_metrics(base)
+    focus = [f"{c}_{m}" for c in FOCUS_CLASSES for m in ("precision", "recall", "f1")]
+    cols = ["accuracy", "f1_macro", "precision_macro", "recall_macro"] + focus + ["train_time_s"]
+    g = base.groupby(["method", "variant"], sort=False)[cols]
+    out = g.mean().add_suffix("_mean").join(g.std(ddof=1).add_suffix("_std"))
+    out = out[[c for m in cols for c in (f"{m}_mean", f"{m}_std")]]
+    preds = base.groupby(["method", "variant"])["ambiguous_vector_pred"].agg(
+        lambda x: ";".join(f"{k}:{v}" for k, v in x.value_counts().items()))
+    out["ambiguous_vector_pred_counts"] = preds
+    out["n_seeds"] = g.size()
+    out = out.reset_index()
+    out = out.assign(_v=out["variant"].map({"unweighted_ref": 0, "balanced": 1}))
+    out = out.sort_values(["method", "_v"]).drop(columns="_v")
+    out.to_csv(T / "class_weight_comparison.csv", index=False)
+
+    rows = []
+    for (m, v), grp in base.groupby(["method", "variant"]):
+        for c in config.CLASS_ORDER:
+            row = {"method": m, "variant": v, "class": c}
+            for met in ("precision", "recall", "f1"):
+                vals = [p[c][met] for p in grp["per_class"]]
+                row[f"{met}_mean"], row[f"{met}_std"] = float(np.mean(vals)), float(np.std(vals, ddof=1))
+            rows.append(row)
+    pd.DataFrame(rows).to_csv(T / "class_weight_per_class.csv", index=False)
+    return out
+
+
+def optional_extensions_table(runs):
+    """SMOTE and homogeneous SEL against the unweighted reference (FI/PFI, k=8)."""
+    base = _select(runs, stack_method="predict", dedup=False, k="8")
+    base = base[base["variant"].isin(["unweighted_ref", "smote", "homogeneous"])
+                & base["method"].isin(["FI", "PFI"])]
+    if base.empty:
+        return None
+    base = _with_class_metrics(base)
+    cols = ["accuracy", "f1_macro", "MITM_recall", "MITM_precision", "Malware_precision",
+            "DDoS_recall", "train_time_s", "predict_time_s", "size_bytes"]
+    g = base.groupby(["model", "variant", "method"], sort=False)[cols]
+    out = g.mean().add_suffix("_mean").join(g.std(ddof=1).add_suffix("_std"))
+    out = out[[c for m in cols for c in (f"{m}_mean", f"{m}_std")]]
+    out["ambiguous_vector_pred_counts"] = base.groupby(["model", "variant", "method"])[
+        "ambiguous_vector_pred"].agg(lambda x: ";".join(f"{k}:{v}" for k, v in x.value_counts().items()))
+    out["n_seeds"] = g.size()
+    out = out.reset_index()
+    out = out.assign(_v=out["variant"].map({"unweighted_ref": 0, "smote": 1, "homogeneous": 2}))
+    out = out.sort_values(["method", "_v"]).drop(columns="_v")
+    out.to_csv(T / "optional_extensions.csv", index=False)
+    return out
+
+
+def pca_variance_table():
+    """Cumulative explained variance of PCA on MinMax-scaled X_train (seed 42)."""
+    from sklearn.decomposition import PCA
+    from sklearn.preprocessing import MinMaxScaler
+    from . import data
+    X, y = data.load_dataset()
+    s = data.split(X, y, config.MAIN_SEED)
+    p = PCA(random_state=config.MAIN_SEED).fit(MinMaxScaler().fit_transform(s.X_train))
+    cum = 100 * np.cumsum(p.explained_variance_ratio_)
+    df = pd.DataFrame({"k": config.K_VALUES, "cumulative_explained_variance_pct": [cum[k - 1] for k in config.K_VALUES]})
+    df.to_csv(T / "pca_explained_variance.csv", index=False)
+    return df
+
+
+def build_phase3(runs):
+    pca_variance_table()
+    mi_ranking_table()
+    ksweep_all_methods_tables(runs)
+    class_weight_table(runs)
+    optional_extensions_table(runs)
+
+
 def build_all():
     T.mkdir(parents=True, exist_ok=True)
     runs = load_runs()
@@ -276,4 +421,6 @@ def build_all():
     stack_method_table(runs)
     dedup_table(runs)
     paper_vs_ours(runs)
+    if (RANK_DIR / f"MI_seed{config.SEEDS[-1]}_dedup0.csv").exists():
+        build_phase3(runs)
     print("tables written to", T)

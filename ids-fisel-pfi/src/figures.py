@@ -1,4 +1,4 @@
-"""Phase-2 figures (PNG, dpi=200) built from results/tables and the run cache."""
+"""Phase-2 and phase-3 figures (PNG, dpi=200) built from results/tables and the run cache."""
 
 import json
 
@@ -219,6 +219,103 @@ def fig_leaky_vs_clean():
     ps.save(fig, F / "leaky_vs_clean.png")
 
 
+# ---------------------------------------------------------------- phase 3
+
+# Secondary encoding per method: every method also has its own marker and
+# dash, and lines are direct-labeled where they stand apart (MI has a
+# contrast WARN in the validator, so it must be direct-labeled).
+METHOD_STYLE = {
+    "FI": {"marker": "o", "ls": "-"},
+    "PFI": {"marker": "s", "ls": "-"},
+    "MI": {"marker": "^", "ls": (0, (5, 2))},
+    "PCA": {"marker": "D", "ls": (0, (2, 2))},
+}
+
+
+# (method, k position, vertical offset in points)
+DIRECT_LABELS_F1 = [("MI", 0, 8), ("PCA", 4, -15), ("PFI", 2, -14)]
+DIRECT_LABELS_TIME = [("PCA", 3, -15), ("PFI", 3, 9), ("MI", 1, 9), ("FI", 4, 9)]
+
+
+def fig_methods_vs_k():
+    a = pd.read_csv(T / "ksweep_all_methods_5seeds.csv")
+    fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.4))
+    for ax, col, title, ylab in [
+            (axes[0], "f1_macro", "Macro-F1 by number of features", "Macro-F1 (%)"),
+            (axes[1], "train_time_s", "Training time by number of features", "Training time (s)")]:
+        for m in ("FI", "PFI", "MI", "PCA"):
+            d = a[a["method"] == m]
+            x = _kpos(d["k"])
+            mu, sd = d[f"{col}_mean"].to_numpy(), d[f"{col}_std"].to_numpy()
+            c = ps.METHOD_COLORS[m]
+            st = METHOD_STYLE[m]
+            ax.fill_between(x, mu - sd, mu + sd, color=c, alpha=0.12, lw=0)
+            ax.plot(x, mu, color=c, ls=st["ls"], marker=st["marker"], markersize=6,
+                    markeredgecolor=ps.PAPER, markeredgewidth=1.2, label=f"{m}-SEL")
+        # Direct labels only where a line stands apart; the shared legend and
+        # the per-method markers carry identity where lines overlap.
+        labels = (DIRECT_LABELS_F1 if col == "f1_macro" else DIRECT_LABELS_TIME)
+        for m, kpos, dy in labels:
+            d = a[a["method"] == m]
+            y = d[f"{col}_mean"].to_numpy()[kpos]
+            ax.annotate(f"{m}-SEL", (kpos, y), xytext=(0, dy), textcoords="offset points",
+                        color=ps.INK_2, fontsize=8.5, ha="center", fontweight="bold")
+        _k_axis(ax)
+        ax.set_title(title)
+        ax.set_ylabel(ylab)
+        if col == "train_time_s":
+            ax.set_ylim(bottom=0)
+    px = [_kpos(pd.Series(["8"]))[0], _kpos(pd.Series(["all"]))[0]]
+    axes[0].scatter(px, [PAPER_TABLE9[8]["f1_macro"], PAPER_TABLE9["all"]["f1_macro"]], marker="D",
+                    s=40, color=ps.ALERT, zorder=5, edgecolor=ps.PAPER, label="Main paper, Table 9")
+    h, lab = axes[0].get_legend_handles_labels()
+    fig.legend(h, lab, loc="lower center", ncols=5, bbox_to_anchor=(0.5, -0.02))
+    fig.text(0.01, -0.07, "Mean ± std over 5 seeds. For PCA, k is the number of components. "
+             "The 'All (42)' point is the same no-reduction run for every method. "
+             "Ranking time of FI, PFI and MI is not in the training time; PCA fit time is.",
+             color=ps.MUTED, fontsize=8)
+    fig.tight_layout(rect=(0, 0.06, 1, 1))
+    ps.save(fig, F / "methods_vs_k.png")
+
+
+def fig_class_weight():
+    d = pd.read_csv(T / "class_weight_comparison.csv")
+    specs = [("f1_macro", "Macro-F1"), ("MITM_recall", "MITM recall"),
+             ("MITM_precision", "MITM precision"), ("Malware_precision", "Malware precision"),
+             ("DDoS_recall", "DDoS recall")]
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), sharey=True)
+    w = 0.38
+    x = np.arange(len(specs))
+    for ax, m in zip(axes, ("FI", "PFI")):
+        for i, (variant, color, name) in enumerate(
+                [("unweighted_ref", ps.NEUTRAL, "Unweighted SEL"),
+                 ("balanced", ps.ALERT, 'class_weight="balanced" (LR, DT)')]):
+            r = d[(d["method"] == m) & (d["variant"] == variant)].iloc[0]
+            bars = ax.bar(x + (i - 0.5) * w, [r[f"{c}_mean"] for c, _ in specs], w * 0.94,
+                          yerr=[r[f"{c}_std"] for c, _ in specs], color=color, label=name,
+                          error_kw={"ecolor": ps.INK_2, "elinewidth": 1, "capsize": 2})
+            ax.bar_label(bars, fmt="%.1f", fontsize=7, color=ps.INK_2, padding=2)
+        _bar_ends(ax)
+        ax.set_xticks(x, [lab for _, lab in specs], rotation=15)
+        ax.grid(axis="x", visible=False)
+        ax.set_ylim(0, 112)
+        ax.set_title(f"{m}-SEL, k=8")
+    axes[0].set_ylabel("%")
+    h, lab = axes[0].get_legend_handles_labels()
+    fig.legend(h, lab, loc="lower center", ncols=2, bbox_to_anchor=(0.5, -0.04))
+    fig.text(0.01, 1.0, "Effect of class weighting on SEL (mean ± std, 5 seeds)",
+             fontweight="bold", fontsize=11, color=ps.INK)
+    fig.tight_layout(rect=(0, 0.05, 1, 0.96))
+    ps.save(fig, F / "class_weight_k8.png")
+
+
+def build_phase3():
+    if (T / "ksweep_all_methods_5seeds.csv").exists():
+        fig_methods_vs_k()
+    if (T / "class_weight_comparison.csv").exists():
+        fig_class_weight()
+
+
 def build_all():
     ps.apply()
     F.mkdir(parents=True, exist_ok=True)
@@ -228,4 +325,5 @@ def build_all():
     fig_confusion()
     fig_cost_vs_k()
     fig_leaky_vs_clean()
+    build_phase3()
     print("figures written to", F)
