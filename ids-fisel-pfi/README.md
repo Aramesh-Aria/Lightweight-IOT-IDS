@@ -19,7 +19,13 @@ and place it in `data/`.
 
 ```bash
 .venv/bin/python -m src.check_data      # data sanity checks -> results/tables/class_counts.csv
+.venv/bin/python run_experiments.py timing    # quick runtime estimate
+.venv/bin/python run_experiments.py all       # every phase-2 experiment, tables and figures (~45 min)
 ```
+
+Each experiment also runs alone: `rank`, `ksweep`, `single`, `leaky`, `stack`,
+`dedup`, `tables`, `figures`. Use `--seeds 42` for one seed and `--force` to
+ignore the cache in `results/cache/` (git-ignored).
 
 ## Layout
 
@@ -28,6 +34,13 @@ data/              dataset (git-ignored)
 src/config.py      paths, seeds, k values, dropped columns, class mapping
 src/data.py        load_dataset(dedup), split(X, y, seed)
 src/check_data.py  sanity checks for the data module
+src/selection.py   rank_fi, rank_pfi (ExtraTrees entropy; permutation importance)
+src/models.py      SEL, single models, pipeline, fit_leaky_sel (Algorithm 1 reading)
+src/evaluate.py    metrics, timing, joblib pipeline size
+src/tables.py      CSV tables from the cache
+src/figures.py     figures (dpi=200)
+src/plot_style.py  shared figure style (palette, Instrument Sans)
+run_experiments.py experiment runner with cache
 notebooks/         walkthrough notebook
 results/tables/    CSV tables
 results/figures/   figures

@@ -1,0 +1,144 @@
+"""Model factories: SEL, single models, and the possibly-leaky SEL of Algorithm 1.
+
+Every model sits inside Pipeline(MinMaxScaler -> ColumnSelector(top-k) -> model).
+MinMaxScaler outputs an ndarray, so ColumnSelector selects by integer index.
+The selector lives in this module so joblib can pickle the pipeline.
+
+Timed fits use n_jobs=1 everywhere, so train and predict times are comparable.
+"""
+
+import time
+from dataclasses import dataclass
+
+import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.ensemble import StackingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+from sklearn.tree import DecisionTreeClassifier
+
+SINGLE_MODELS = ("DT", "LR", "NB")
+
+
+class ColumnSelector(BaseEstimator, TransformerMixin):
+    """Keep the given column indices (None keeps all columns)."""
+
+    def __init__(self, indices=None):
+        self.indices = indices
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        if self.indices is None:
+            return X
+        return np.asarray(X)[:, list(self.indices)]
+
+
+def make_lr() -> LogisticRegression:
+    # Q34: only max_iter is changed from the scikit-learn defaults.
+    return LogisticRegression(max_iter=1000)
+
+
+def make_dt(seed: int) -> DecisionTreeClassifier:
+    return DecisionTreeClassifier(random_state=seed)
+
+
+def make_nb() -> GaussianNB:
+    return GaussianNB()
+
+
+def make_sel(seed: int, stack_method: str = "predict") -> StackingClassifier:
+    """SEL: NB + LR base learners, DT meta-learner, passthrough features.
+
+    stack_method="predict" is the main setting (Q42, Table 10 of the paper:
+    the meta-learner receives predicted labels). "predict_proba" is a side
+    comparison. The meta-learner is trained on 5-fold cross-validated
+    predictions of the training data, so this is the leakage-free variant.
+    """
+    return StackingClassifier(
+        estimators=[("nb", make_nb()), ("lr", make_lr())],
+        final_estimator=make_dt(seed),
+        passthrough=True,
+        stack_method=stack_method,
+        n_jobs=1,
+    )
+
+
+def make_single(name: str, seed: int):
+    if name == "DT":
+        return make_dt(seed)
+    if name == "LR":
+        return make_lr()
+    if name == "NB":
+        return make_nb()
+    raise ValueError(f"Unknown model: {name}")
+
+
+def make_pipeline(model, indices=None) -> Pipeline:
+    return Pipeline(
+        [
+            ("scaler", MinMaxScaler()),
+            ("select", ColumnSelector(indices)),
+            ("model", model),
+        ]
+    )
+
+
+@dataclass
+class LeakyResult:
+    """Output of fit_leaky_sel. y_pred is on the same test rows the meta-learner saw."""
+
+    y_pred: np.ndarray
+    train_time_s: float
+    predict_time_s: float
+    pipeline: object  # dict of fitted parts, used only for the size measurement
+
+
+def fit_leaky_sel(X_train, y_train, X_test, y_test, indices, seed: int) -> LeakyResult:
+    """Our reading of Algorithm 1 of the main paper (possible leakage, Q41).
+
+    Algorithm 1 (p. 5): base learners are trained on S1 (train) and predict S2
+    (test) to get WL; the ensemble dataset D' = F u WL is built; the
+    meta-learner is trained on D' and tested on S2. Read literally, the
+    meta-learner is trained and scored on the test rows. Section text on p. 4
+    instead says predictions are added to the training data, so the leakage is
+    only possible, not certain. This function measures the possible effect of
+    leakage under Algorithm 1.
+
+    Base learner outputs are predicted labels (stack_method="predict"), encoded
+    with LabelEncoder (sorted class names), the same encoding StackingClassifier
+    uses internally.
+    """
+    encoder = LabelEncoder().fit(y_train)
+    ytr = encoder.transform(y_train)
+    yte = encoder.transform(y_test)
+
+    t0 = time.perf_counter()
+    scaler = MinMaxScaler().fit(X_train)
+    selector = ColumnSelector(indices)
+    Xtr = selector.transform(scaler.transform(X_train))
+    Xte = selector.transform(scaler.transform(X_test))
+
+    nb = make_nb().fit(Xtr, ytr)
+    lr = make_lr().fit(Xtr, ytr)
+    # Base-learning step: predictions WL on the test set S2.
+    wl = np.column_stack([nb.predict(Xte), lr.predict(Xte)])
+    # Meta-learning step: D' = F u WL, built from the test rows.
+    d_prime = np.hstack([wl, Xte])
+    meta = make_dt(seed).fit(d_prime, yte)
+    train_time = time.perf_counter() - t0
+
+    t1 = time.perf_counter()
+    y_pred = meta.predict(d_prime)
+    predict_time = time.perf_counter() - t1
+
+    parts = {"scaler": scaler, "select": selector, "nb": nb, "lr": lr, "meta": meta}
+    return LeakyResult(
+        y_pred=encoder.inverse_transform(y_pred),
+        train_time_s=train_time,
+        predict_time_s=predict_time,
+        pipeline=parts,
+    )
