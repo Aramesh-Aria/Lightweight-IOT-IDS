@@ -30,6 +30,23 @@ python3.11 -m venv .venv
 .venv/bin/python -m src.summary
 ```
 
+## فهرست ویژگی‌ها {#sec:app-features}
+
+@tbl:method-features ۴۲ ویژگی ورودی مدل را پس از حذف ۱۹ ستون بر حسب پروتکل نشان می‌دهد.
+
+| پروتکل | تعداد | ویژگی‌ها |
+|---|---|---|
+| ARP | ۲ | `arp.opcode`، `arp.hw.size` |
+| ICMP | ۴ | `icmp.checksum`، `icmp.seq_le`، `icmp.transmit_timestamp`، `icmp.unused` (ثابت) |
+| HTTP | ۳ | `http.content_length`، `http.response`، `http.tls_port` (ثابت) |
+| TCP | ۱۲ | `tcp.ack`، `tcp.ack_raw`، `tcp.checksum`، `tcp.connection.fin`، `tcp.connection.rst`، `tcp.connection.syn`، `tcp.connection.synack`، `tcp.dstport`، `tcp.flags`، `tcp.flags.ack`، `tcp.len`، `tcp.seq` |
+| UDP | ۳ | `udp.port`، `udp.stream`، `udp.time_delta` |
+| DNS | ۶ | `dns.qry.name`، `dns.qry.qu`، `dns.qry.type` (ثابت)، `dns.retransmission`، `dns.retransmit_request`، `dns.retransmit_request_in` (ثابت) |
+| MQTT | ۹ | `mqtt.conflag.cleansess`، `mqtt.conflags`، `mqtt.hdrflags`، `mqtt.len`، `mqtt.msg_decoded_as` (ثابت)، `mqtt.msgtype`، `mqtt.proto_len`، `mqtt.topic_len`، `mqtt.ver` |
+| Modbus/TCP | ۳ | `mbtcp.len` (ثابت)، `mbtcp.trans_id` (ثابت)، `mbtcp.unit_id` (ثابت) |
+
+: ۴۲ ویژگی ورودی بر حسب پروتکل. ستون‌هایی که در کل فایل مقدار ثابت دارند با «ثابت» مشخص شده‌اند {#tbl:method-features}
+
 ## معیارهای weighted {#sec:app-weighted}
 
 @tbl:app-weighted میانگین weighted معیارها را برای چند حالت اصلی نشان می‌دهد. در میانگین weighted وزن هر کلاس سهم آن از داده‌ی آزمون است. چون MITM کمتر از یک درصد داده است، ضعف این کلاس در این معیارها کم دیده می‌شود. recall weighted همیشه با accuracy برابر است.

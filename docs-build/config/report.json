@@ -1,0 +1,42 @@
+{
+  "title": "تشخیص نفوذ سبک‌وزن در IoT با Machine Learning و Feature Selection",
+  "titleLines": [
+    "تشخیص نفوذ سبک‌وزن",
+    "در IoT"
+  ],
+  "subtitle": "بازپیاده‌سازی و نقد روش FI-SEL و مقایسه‌ی آن با PFI",
+  "shortTitle": "گزارش سمینار · تشخیص نفوذ سبک‌وزن در IoT",
+  "latinTitle": "LIGHTWEIGHT IoT INTRUSION DETECTION",
+  "latinKind": "SEMINAR REPORT",
+  "author": "احمد آرامش‌مقدم",
+  "supervisor": "دکتر مجتبی محمدپور",
+  "university": "دانشگاه آزاد اسلامی، واحد علوم و تحقیقات",
+  "faculty": "دانشکده‌ی مهندسی کامپیوتر",
+  "semester": "نیمسال اول ۱۴۰۵–۱۴۰۶",
+  "kind": "گزارش سمینار کارشناسی ارشد",
+  "keywordsColumn": [
+    "Feature Importance",
+    "Permutation FI",
+    "Stacking Ensemble",
+    "ExtraTrees",
+    "Edge-IIoTset",
+    "macro-F1",
+    "MITM"
+  ],
+  "chapterLabels": {
+    "sec:abstract-fa": "ABSTRACT · PERSIAN",
+    "sec:abstract-en": "ABSTRACT · ENGLISH",
+    "sec:intro": "INTRODUCTION",
+    "sec:background": "BACKGROUND AND CORE CONCEPTS",
+    "sec:main-paper": "MAIN PAPER REVIEW · FI-SEL",
+    "sec:support-paper": "SUPPORT PAPER REVIEW · DIMENSIONALITY REDUCTION",
+    "sec:method": "REIMPLEMENTATION METHOD",
+    "sec:results": "RESULTS",
+    "sec:critique": "CRITIQUE OF THE MAIN PAPER",
+    "sec:conclusion": "CONCLUSION AND FUTURE WORK",
+    "sec:references": "REFERENCES · IEEE",
+    "sec:appendix": "APPENDIX"
+  },
+  "featureSource": "../ids-fisel-pfi/results/tables/fi_ranking.csv",
+  "coverSubtitle": "با Machine Learning و Feature Selection"
+}

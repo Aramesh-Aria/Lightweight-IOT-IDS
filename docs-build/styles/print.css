@@ -1,0 +1,32 @@
+/* Print variant (Q39): white pages and a light cover. Loaded after report.css when <html class="print">. */
+@page { background: #ffffff; }
+@page cover { background: #ffffff; }
+html.print { --cover-bg: #ffffff; --cover-fg: #111a2b; --paper: #ffffff; }
+html.print section.cover { background-image: radial-gradient(rgba(17, 26, 43, .09) 1px, transparent 1.3px); border-top: 5mm solid #111a2b; }
+html.print .logo-tile { background: transparent; }
+html.print .inst-text .fac { opacity: 1; color: #3a4356; }
+html.print .inst-text .kind { color: #0b6e66; }
+html.print .cover-kw { color: #3a4356; border-left-color: #d8d2c4; }
+html.print .cover-label .a { color: #0b6e66; }
+html.print .cover-label .b { color: #b4530b; }
+html.print .cover-sub { color: #3a4356; }
+html.print .cover-rule { background: #b4530b; }
+html.print .cover-desc { color: #3a4356; }
+html.print .ca-mono, html.print .ca-sub { fill: #3a4356; }
+html.print .ca-val { fill: #b4530b; }
+html.print .ca-bar { stroke: #0b6e66; }
+html.print .ca-bar.hi { fill: rgba(11, 110, 102, .12); stroke: #0b6e66; }
+html.print .ca-link { stroke: #0b6e66; }
+html.print .ca-link.dashed { stroke: #b4530b; }
+html.print .ca-box { stroke: #0b6e66; }
+html.print .ca-box.meta { stroke: #b4530b; fill: rgba(180, 83, 11, .08); }
+html.print .ca-lbl { fill: #111a2b; }
+html.print .ca-lbl.meta { fill: #b4530b; }
+html.print .ca-dot { fill: #b4530b; }
+html.print .people .role { color: #0b6e66; }
+html.print .feat-block { color: #3a4356; }
+html.print .fb-head { color: #3a4356; }
+html.print .fb-n { color: #111a2b; }
+html.print .fb-i { color: #b4530b; }
+html.print .fb-v { color: #0b6e66; }
+html.print .fig-box { background: #ffffff; }

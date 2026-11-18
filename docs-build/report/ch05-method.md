@@ -10,19 +10,6 @@
 
 فایل دیتاست ۱۵۷٬۸۰۰ ردیف و ۶۳ ستون دارد و هیچ مقدار خالی ندارد. طبق مقاله‌ی اصلی، این ۱۹ ستون حذف شدند: `frame.time`، `ip.src_host`، `ip.dst_host`، `arp.dst.proto_ipv4`، `arp.src.proto_ipv4`، `http.file_data`، `http.request.uri.query`، `http.request.method`، `http.referer`، `http.request.full_uri`، `http.request.version`، `tcp.options`، `tcp.payload`، `tcp.srcport`، `dns.qry.name.len`، `mqtt.conack.flags`، `mqtt.msg`، `mqtt.protoname` و `mqtt.topic` [@abdulkareem2024, ص. ۵–۶]. ستون `Attack_label` هم از ورودی حذف شد، چون برچسب دودویی است. ستون `Attack_type` فقط برای ساختن کلاس به کار رفت. @tbl:method-features ۴۲ ویژگی باقی‌مانده را بر حسب پروتکل نشان می‌دهد. هشت ستون در کل فایل مقدار ثابت دارند. این ستون‌ها مثل مقاله نگه داشته شدند، پس فقط ۳۴ ویژگی اطلاعات دارند.
 
-| پروتکل | تعداد | ویژگی‌ها |
-|---|---|---|
-| ARP | ۲ | `arp.opcode`، `arp.hw.size` |
-| ICMP | ۴ | `icmp.checksum`، `icmp.seq_le`، `icmp.transmit_timestamp`، `icmp.unused` (ثابت) |
-| HTTP | ۳ | `http.content_length`، `http.response`، `http.tls_port` (ثابت) |
-| TCP | ۱۲ | `tcp.ack`، `tcp.ack_raw`، `tcp.checksum`، `tcp.connection.fin`، `tcp.connection.rst`، `tcp.connection.syn`، `tcp.connection.synack`، `tcp.dstport`، `tcp.flags`، `tcp.flags.ack`، `tcp.len`، `tcp.seq` |
-| UDP | ۳ | `udp.port`، `udp.stream`، `udp.time_delta` |
-| DNS | ۶ | `dns.qry.name`، `dns.qry.qu`، `dns.qry.type` (ثابت)، `dns.retransmission`، `dns.retransmit_request`، `dns.retransmit_request_in` (ثابت) |
-| MQTT | ۹ | `mqtt.conflag.cleansess`، `mqtt.conflags`، `mqtt.hdrflags`، `mqtt.len`، `mqtt.msg_decoded_as` (ثابت)، `mqtt.msgtype`، `mqtt.proto_len`، `mqtt.topic_len`، `mqtt.ver` |
-| Modbus/TCP | ۳ | `mbtcp.len` (ثابت)، `mbtcp.trans_id` (ثابت)، `mbtcp.unit_id` (ثابت) |
-
-: ۴۲ ویژگی ورودی بر حسب پروتکل. ستون‌هایی که در کل فایل مقدار ثابت دارند با «ثابت» مشخص شده‌اند {#tbl:method-features}
-
 پانزده نوع حمله با گروه‌بندی Ferrag و همکاران به شش کلاس نگاشت شدند (@tbl:classes) [@ferrag2022edge]. تعداد ردیف هر کلاس دقیقاً با جدول ۳ مقاله‌ی اصلی یکی است. ویژگی‌ها با `MinMaxScaler` به بازه‌ی صفر تا یک برده شدند. scaler اولین گام هر pipeline است و فقط روی داده‌ی آموزش fit می‌شود. پس از حذف ۱۹ ستون، ۵٬۵۵۵ ردیف تکراری می‌شوند. اجرای اصلی این ردیف‌ها را نگه می‌دارد، چون مقاله درباره‌ی آن‌ها چیزی نگفته است. یک اجرای جدا تکراری‌ها را پیش از تقسیم حذف می‌کند و نتیجه‌ی آن در @sec:crit-dup آمده است.
 
 ## تقسیم داده {#sec:method-split}

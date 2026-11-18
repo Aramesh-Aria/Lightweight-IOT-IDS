@@ -1,0 +1,248 @@
+/* Seminar report: Q29 body spec + Q38 design components from design-reference.md */
+
+@font-face { font-family: "IRNazanin"; src: url("../../fonts/IRNazanin/IRNazanin.ttf"); font-weight: 400; }
+@font-face { font-family: "IRNazanin"; src: url("../../fonts/IRNazanin/IRNazanin-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Thin.ttf"); font-weight: 100; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Light.ttf"); font-weight: 300; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Medium.ttf"); font-weight: 500; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-SemiBold.ttf"); font-weight: 600; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-ExtraBold.ttf"); font-weight: 800; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Black.ttf"); font-weight: 900; }
+@font-face { font-family: "Instrument Sans"; src: url("../../fonts/latin/InstrumentSans-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Instrument Sans"; src: url("../../fonts/latin/InstrumentSans-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Crimson Pro"; src: url("../../fonts/latin/CrimsonPro-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Crimson Pro"; src: url("../../fonts/latin/CrimsonPro-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Crimson Pro"; src: url("../../fonts/latin/CrimsonPro-Italic.ttf"); font-style: italic; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../fonts/latin/JetBrainsMono-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../fonts/latin/JetBrainsMono-Bold.ttf"); font-weight: 700; }
+
+:root {
+  --navy: #111a2b; --green: #0b6e66; --teal: #3fb5a6; --teal-l: #7fd1c4;
+  --orange: #b4530b; --orange-l: #e09a52; --brown: #8a3f08;
+  --paper: #fbf9f4; --soft: #f4f2ec; --soft2: #e9e4d8; --green-soft: #e2efec; --orange-soft: #f7eadb;
+  --gray: #7b8191; --gray-d: #3a4356; --rule: #d8d2c4; --rule-l: #e6e9ee;
+  --cover-bg: var(--navy); --cover-fg: #ffffff;
+}
+
+@page {
+  size: A4;
+  margin: 2.5cm;
+  background: #fbf9f4;
+  @top-left { font-family: "Instrument Sans"; font-size: 6.8pt; letter-spacing: .18em; color: #7b8191; vertical-align: bottom; padding-bottom: 6mm; }
+  @top-right { font-family: "Vazirmatn"; font-size: 7.5pt; color: #7b8191; vertical-align: bottom; padding-bottom: 6mm; }
+  @bottom-center { content: counter(page, persian); font-family: "Vazirmatn"; font-weight: 600; font-size: 10pt; color: #0b6e66; vertical-align: top; padding-top: 7mm; }
+}
+@page cover {
+  margin: 0;
+  background: #111a2b;
+  @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; }
+}
+
+* { box-sizing: border-box; }
+html { background: transparent; }
+body {
+  margin: 0;
+  font-family: "IRNazanin", serif;
+  font-size: 13pt;
+  line-height: 1.5;
+  color: var(--navy);
+  text-align: justify;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  font-kerning: normal;
+}
+p { margin: 0 0 .55em; orphans: 2; widows: 2; }
+strong { font-weight: 700; }
+a { color: inherit; text-decoration: none; }
+
+/* Latin runs inside Persian prose */
+.lat { font-family: "Crimson Pro", "IRNazanin", serif; font-size: .97em; }
+.en { color: var(--gray); }
+.en .lat { color: var(--gray); }
+code {
+  font-family: "JetBrains Mono", monospace; font-size: .72em; direction: ltr; unicode-bidi: isolate;
+  background: var(--soft); border: .5pt solid var(--soft2); border-radius: 3px; padding: 0 .28em; white-space: nowrap;
+}
+.cite { white-space: nowrap; }
+.xref { white-space: nowrap; }
+
+/* ---------- chapter start ---------- */
+section.chapter, section.toc, section.lists { break-before: page; }
+.ch-head { display: flex; align-items: center; gap: 6mm; margin: 2mm 0 4mm; }
+.ch-num { font-family: "Vazirmatn"; font-weight: 900; font-size: 58pt; line-height: 1; color: var(--green); }
+.ch-titles h1 { font-family: "Vazirmatn"; font-weight: 900; font-size: 24pt; line-height: 1.25; margin: 0; color: var(--navy); }
+.ch-lat { font-family: "Instrument Sans"; font-weight: 700; font-size: 7.5pt; letter-spacing: .28em; color: var(--gray); margin-top: 2mm; direction: ltr; text-align: right; }
+.zigzag {
+  height: 7px; margin: 0 0 7mm;
+  background:
+    linear-gradient(135deg, var(--navy) 25%, transparent 25%) -4px 0 / 8px 7px,
+    linear-gradient(225deg, var(--navy) 25%, transparent 25%) -4px 0 / 8px 7px;
+  background-repeat: repeat-x;
+}
+section.lang-en .ch-lat { text-align: left; }
+
+/* ---------- section headings ---------- */
+h2 {
+  font-family: "Vazirmatn"; font-weight: 800; font-size: 14.5pt; line-height: 1.4; color: var(--navy);
+  margin: 7mm 0 3mm; padding-top: 4mm; border-top: .6pt solid var(--rule);
+  break-after: avoid; text-align: right;
+}
+.ch-head + .zigzag + h2 { border-top: none; padding-top: 0; margin-top: 2mm; }
+.sec-num { color: var(--green); margin-left: 3mm; font-weight: 800; }
+h3 {
+  font-family: "Vazirmatn"; font-weight: 700; font-size: 12pt; line-height: 1.4; color: var(--navy);
+  margin: 5mm 0 2mm; break-after: avoid; text-align: right;
+}
+h3 .dia { display: inline-block; width: 6px; height: 6px; background: var(--green); transform: rotate(45deg); margin-left: 2.5mm; vertical-align: middle; position: relative; top: -1px; }
+h3 .sec-num { color: var(--green); font-weight: 700; margin-left: 2mm; }
+h2 .lat, h3 .lat, .ch-titles .lat { font-family: "Vazirmatn"; font-size: 1em; }
+
+/* ---------- tables ---------- */
+.tbl { margin: 4mm 0 5mm; }
+.caption, figcaption {
+  font-family: "Vazirmatn"; font-size: 8.6pt; line-height: 1.55; color: var(--gray-d); text-align: center;
+  break-after: avoid;
+}
+.caption { margin-bottom: 2mm; }
+.caption .lbl, figcaption .lbl { color: var(--green); font-weight: 700; margin-left: 2mm; white-space: nowrap; }
+.caption .lbl::after, figcaption .lbl::after { content: ""; display: inline-block; width: 6mm; height: 1.2pt; background: var(--green); margin-right: 2mm; vertical-align: middle; }
+.caption .lat, figcaption .lat { font-family: "Vazirmatn"; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-family: "Vazirmatn"; font-size: 8.8pt; line-height: 1.45; text-align: right;
+}
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th { background: var(--navy); color: #fff; font-weight: 600; padding: 2.2mm 2.2mm; text-align: center; vertical-align: middle; }
+th .lat { font-family: "Vazirmatn"; }
+td { padding: 1.6mm 2.2mm; border-bottom: .5pt solid var(--rule-l); vertical-align: middle; }
+tbody tr:nth-child(even) td { background: var(--soft); }
+td.first { font-weight: 700; }
+td.num { text-align: center; white-space: nowrap; }
+td .lat { font-family: "Vazirmatn"; font-size: 1em; }
+td code { font-size: .86em; white-space: normal; padding: 0 .2em; }
+.tbl.wide table { font-size: 7.9pt; }
+.tbl.wide td, .tbl.wide th { padding-left: 1.4mm; padding-right: 1.4mm; }
+td .cite, th .cite { font-size: .95em; }
+
+/* ---------- figures ---------- */
+figure { margin: 5mm 0 6mm; break-inside: avoid; }
+.fig-box { border: .6pt solid var(--rule); border-radius: 5px; background: #fff; padding: 3mm; text-align: center; }
+.fig-box img { max-width: 100%; max-height: 10.5cm; display: block; margin: 0 auto; }
+figcaption { margin-top: 2.5mm; }
+
+/* ---------- equations ---------- */
+.eq {
+  display: flex; align-items: center; justify-content: center; position: relative;
+  margin: 4mm -2mm 5mm; padding: 2.5mm 14mm;
+  background: linear-gradient(90deg, transparent 0%, var(--green-soft) 18%, var(--green-soft) 82%, transparent 100%);
+  border-top: .5pt solid rgba(11, 110, 102, .35); border-bottom: .5pt solid rgba(11, 110, 102, .35);
+  break-inside: avoid;
+}
+.eq-body .katex-display { margin: 0; }
+.eq-body .katex { font-size: 1.05em; color: var(--navy); }
+.eq-num { position: absolute; left: 3mm; font-family: "Vazirmatn"; font-size: 9.5pt; color: var(--green); font-weight: 600; }
+
+/* ---------- code ---------- */
+pre.code {
+  font-family: "JetBrains Mono", monospace; font-size: 8.4pt; line-height: 1.6; text-align: left;
+  background: var(--navy); color: #e6e9ee; border-radius: 5px; padding: 3.5mm 4.5mm; margin: 3mm 0 5mm;
+  white-space: pre-wrap; break-inside: avoid;
+}
+pre.code code { background: none; border: 0; padding: 0; font-size: 1em; color: inherit; white-space: pre-wrap; }
+
+/* ---------- abstracts ---------- */
+section.lang-en { font-family: "Crimson Pro", serif; font-size: 12.5pt; line-height: 1.5; text-align: justify; }
+section.lang-en .ch-titles h1 { font-family: "Instrument Sans"; font-weight: 700; }
+section.lang-en .ch-head { flex-direction: row; }
+p.kw { margin-top: 4mm; padding-top: 3mm; border-top: .6pt solid var(--rule); }
+p.kw strong { color: var(--green); font-family: "Vazirmatn"; font-size: .9em; margin-left: 1.5mm; }
+section.lang-en p.kw strong { font-family: "Instrument Sans"; margin-left: 0; margin-right: 1.5mm; }
+
+/* ---------- TOC and lists ---------- */
+.toc-head { display: flex; align-items: baseline; gap: 5mm; padding-bottom: 4mm; border-bottom: 1.2pt solid var(--navy); margin-bottom: 4mm; }
+.toc-head h1 { font-family: "Vazirmatn"; font-weight: 900; font-size: 30pt; margin: 0; line-height: 1.1; }
+.toc-lat { font-family: "Instrument Sans"; font-weight: 700; font-size: 7.5pt; letter-spacing: .3em; color: var(--gray); }
+.leader { flex: 1; border-bottom: 1pt dashed var(--rule); margin: 0 2.5mm; position: relative; top: -.35em; min-width: 6mm; }
+.pg { font-family: "Vazirmatn"; font-weight: 700; color: var(--green); min-width: 7mm; text-align: left; display: inline-block; }
+.toc { font-family: "Vazirmatn"; }
+.toc-fronts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 6mm; font-size: 8.5pt; color: var(--gray-d); padding-bottom: 2.5mm; border-bottom: .5pt solid var(--rule); }
+.toc-front { display: flex; align-items: baseline; }
+.toc-front .pg { font-size: 8.5pt; min-width: 5mm; }
+.toc-ch { padding: 2.3mm 0 2mm; border-bottom: .5pt solid var(--rule); break-inside: avoid; }
+.toc-main { display: flex; align-items: center; }
+.tc-num { font-weight: 900; font-size: 19pt; color: var(--green); width: 13mm; line-height: 1; }
+.tc-titles { display: flex; flex-direction: column; }
+.tc-title { font-weight: 800; font-size: 11.5pt; line-height: 1.35; }
+.tc-lat { font-family: "Instrument Sans"; font-weight: 700; font-size: 6.2pt; letter-spacing: .22em; color: var(--gray); direction: ltr; text-align: right; }
+.toc-main .pg { font-size: 11pt; }
+.toc-secs { display: grid; grid-template-columns: 1fr 1fr; gap: .2mm 7mm; padding: 1.2mm 13mm 0 0; }
+.toc-sec { display: flex; align-items: baseline; font-size: 7.9pt; line-height: 1.55; color: var(--gray-d); }
+.ts-num { color: var(--green); font-weight: 700; margin-left: 1.8mm; white-space: nowrap; }
+.ts-title { flex: 1; }
+.toc-sec .pg { font-size: 7.9pt; min-width: 5mm; font-weight: 600; color: var(--gray); }
+.toc .lat { font-family: "Vazirmatn"; font-size: 1em; }
+.lists { font-family: "Vazirmatn"; }
+.lst-h { border-top: none; padding-top: 0; margin: 5mm 0 2mm; font-size: 12pt; }
+.lst { display: flex; align-items: baseline; font-size: 8.4pt; line-height: 1.55; padding: .9mm 0; border-bottom: .4pt solid var(--rule-l); color: var(--gray-d); }
+.lst-lbl { color: var(--green); font-weight: 700; width: 20mm; flex: none; white-space: nowrap; }
+.lst-cap { flex: 0 1 auto; max-width: 128mm; }
+.lst .lat { font-family: "Vazirmatn"; font-size: 1em; }
+.lst .pg { font-size: 8.4pt; }
+
+/* ---------- bibliography ---------- */
+.bib-list { list-style: none; margin: 0; padding: 0; }
+.bib-list li { display: flex; gap: 3mm; margin-bottom: 2mm; break-inside: avoid; }
+.bn { font-family: "Vazirmatn"; font-weight: 700; color: var(--green); font-size: 9.5pt; min-width: 9mm; text-align: right; flex: none; padding-top: .5mm; }
+.be { font-family: "Crimson Pro", serif; font-size: 10.5pt; line-height: 1.45; text-align: left; flex: 1; word-break: break-word; }
+
+/* ---------- cover ---------- */
+section.cover {
+  page: cover; break-after: page;
+  width: 210mm; height: 296.5mm; overflow: hidden; position: relative;
+  padding: 18mm 20mm 16mm;
+  background-color: var(--cover-bg); color: var(--cover-fg);
+  background-image: radial-gradient(rgba(255, 255, 255, .075) 1px, transparent 1.3px);
+  background-size: 7mm 7mm;
+  font-family: "Vazirmatn"; text-align: right;
+}
+.cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.cover-inst { display: flex; align-items: center; gap: 5mm; }
+.logo-tile { width: 21mm; height: 27mm; background: #fbf9f4; border-radius: 4mm; display: flex; align-items: center; justify-content: center; padding: 2.5mm; }
+.logo-tile img { max-width: 100%; max-height: 100%; }
+.inst-text .uni { font-weight: 700; font-size: 11pt; }
+.inst-text .fac { font-weight: 400; font-size: 9.5pt; opacity: .85; }
+.inst-text .kind { font-weight: 300; font-size: 9pt; color: var(--teal-l); margin-top: 1mm; }
+.cover-kw { font-family: "JetBrains Mono"; font-size: 7pt; line-height: 1.9; color: #8d96a8; border-left: .6pt solid #3a4356; padding-left: 3.5mm; text-align: left; }
+.cover-label { margin-top: 26mm; font-family: "Instrument Sans"; font-weight: 700; font-size: 8pt; letter-spacing: .3em; text-align: right; }
+.cover-label .a { color: var(--teal); margin-right: 3mm; }
+.cover-label .b { color: var(--orange-l); }
+.cover-title { font-family: "Vazirmatn"; font-weight: 900; font-size: 41pt; line-height: 1.32; margin: 5mm 0 0; }
+.cover-sub { font-weight: 300; font-size: 17pt; margin-top: 2mm; color: #d5dbe5; }
+.cover-rule { width: 32mm; height: 1.6pt; background: var(--orange-l); margin: 7mm 0 5mm; }
+.cover-desc { font-weight: 400; font-size: 10.5pt; line-height: 1.8; color: #c5ccd8; max-width: 120mm; }
+.cover-desc .lat, .cover-sub .lat { font-family: "Vazirmatn"; font-size: 1em; }
+.cover-art { width: 100%; height: auto; margin-top: 15mm; direction: ltr; }
+.ca-mono { font-family: "JetBrains Mono"; font-size: 10px; fill: #8d96a8; }
+.ca-val { font-family: "JetBrains Mono"; font-size: 9px; fill: var(--orange-l); }
+.ca-bar { fill: none; stroke: var(--teal); stroke-width: 1.1; }
+.ca-bar.hi { fill: rgba(63, 181, 166, .18); stroke: var(--teal-l); }
+.ca-link { fill: none; stroke: var(--teal); stroke-width: 1.2; }
+.ca-link.dashed { stroke: var(--orange-l); stroke-dasharray: 4 4; }
+.ca-box { fill: none; stroke: var(--teal-l); stroke-width: 1.3; }
+.ca-box.meta { stroke: var(--orange-l); fill: rgba(224, 154, 82, .1); }
+.ca-lbl { font-family: "Instrument Sans"; font-weight: 700; font-size: 13px; fill: #fff; text-anchor: middle; }
+.ca-lbl.meta { fill: var(--orange-l); }
+.ca-sub { font-family: "JetBrains Mono"; font-size: 8px; fill: #8d96a8; text-anchor: middle; }
+.ca-dot { fill: var(--orange-l); }
+.cover-bottom { position: absolute; left: 20mm; right: 20mm; bottom: 16mm; display: flex; justify-content: space-between; align-items: flex-end; }
+.people div { display: flex; gap: 4mm; align-items: baseline; margin-top: 1.6mm; }
+.people .role { font-size: 8.5pt; color: var(--teal-l); width: 17mm; }
+.people .name { font-weight: 700; font-size: 11pt; }
+.feat-block { font-family: "JetBrains Mono"; font-size: 6.8pt; line-height: 1.75; color: #8d96a8; text-align: left; }
+.fb-head { font-family: "Instrument Sans"; font-weight: 700; letter-spacing: .2em; font-size: 6.4pt; color: #9aa3b5; margin-bottom: 1mm; }
+.fb-row { display: flex; gap: 3mm; }
+.fb-i { color: var(--orange-l); }
+.fb-n { width: 26mm; color: #cfd6e0; }
+.fb-v { color: var(--teal); }
