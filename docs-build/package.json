@@ -5,7 +5,9 @@
   "scripts": {
     "report": "node scripts/build.mjs",
     "report:pdf": "node scripts/build.mjs pdf",
-    "report:docx": "node scripts/build.mjs docx"
+    "report:docx": "node scripts/build.mjs docx",
+    "slides": "node scripts/build-slides.mjs",
+    "slides:review": "node scripts/build-slides.mjs --png"
   },
   "license": "UNLICENSED",
   "dependencies": {

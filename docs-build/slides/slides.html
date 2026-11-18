@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>{{title}}</title>
+<link rel="stylesheet" href="slides.css">
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide cover">
+  <div class="cv-top">
+    <div class="cv-inst">
+      <div class="logo-tile"><img src="../assets/iau-logo.png" alt=""></div>
+      <div><div class="uni">{{university}}</div><div class="fac">{{faculty}}</div><div class="kind">ارائه‌ی سمینار کارشناسی ارشد</div></div>
+    </div>
+    <div class="cv-kw">{{keywords}}</div>
+  </div>
+  <div class="cv-label"><span class="a">{{latinTitle}}</span><span class="b">SEMINAR PRESENTATION</span></div>
+  <h1 class="cv-title">{{titleLine}}</h1>
+  <div class="cv-sub">{{coverSubtitle}}</div>
+  <div class="cv-rule"></div>
+  <div class="cv-desc">{{subtitle}}</div>
+  <div class="cv-bottom">
+    <div class="people">
+      <div><span class="role">دانشجو</span><span class="name">{{author}}</span></div>
+      <div><span class="role">استاد درس</span><span class="name">{{supervisor}}</span></div>
+      <div><span class="role">نیمسال</span><span class="name">{{semester}}</span></div>
+    </div>
+    {{coverArt}}
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-sec="مقدمه" data-n="۰۱" data-lat="INTRODUCTION · PROBLEM AND MOTIVATION">
+  <div class="ttl"><div class="big">۰۱</div><div><h2>دستگاه‌های IoT صنعتی هدف حمله‌اند و منابع کمی برای دفاع دارند.</h2><span class="tl">PROBLEM AND MOTIVATION</span></div></div>
+  <div class="row">
+    <div class="card n">
+      <div class="cl">SCALE</div>
+      <h3>تعداد دستگاه‌ها به‌سرعت رشد می‌کند.</h3>
+      <div class="stat"><span class="v">۸ ← ۴۱</span><span class="d">میلیارد دستگاه متصل امروز و پیش‌بینی آن تا سال ۲۰۲۷</span></div>
+    </div>
+    <div class="card o">
+      <div class="cl">ATTACK SURFACE</div>
+      <h3>به‌هم‌پیوستگی سطح حمله را بزرگ می‌کند.</h3>
+      <p>دستگاه‌ها حافظه، توان پردازش و فضای ذخیره‌سازی محدودی دارند. همین محدودیت آن‌ها را در برابر حمله آسیب‌پذیر می‌کند.</p>
+    </div>
+    <div class="card">
+      <div class="cl">FIVE ATTACK GROUPS</div>
+      <h3>Edge-IIoTset پنج گروه حمله دارد.</h3>
+      <ul class="sq">
+        <li>DDoS و جمع‌آوری اطلاعات <span class="en">(Information gathering)</span></li>
+        <li>مرد میانی <span class="en">(MITM)</span> و تزریق <span class="en">(Injection)</span></li>
+        <li>بدافزار <span class="en">(Malware)</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tint" style="margin-top:26px"><p>شبکه‌های IoT و IIoT به راه‌حل امنیتی اختصاصی نیاز دارند، چون ویژگی‌های آن‌ها با شبکه‌های سنتی فرق دارد.</p></div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-sec="مقدمه" data-n="۰۱" data-lat="INTRODUCTION · LIGHTWEIGHT IDS">
+  <div class="ttl"><div><h2>IDS در لبه‌ی شبکه باید با ویژگی کم و مدل کوچک کار کند.</h2><span class="tl">INTRUSION DETECTION AT THE EDGE</span></div></div>
+  <div class="row">
+    <div class="stack col-2">
+      <p>سامانه‌ی تشخیص نفوذ <span class="en">(Intrusion Detection System، IDS)</span> ترافیک را بررسی می‌کند تا حمله را تشخیص دهد.</p>
+      <div class="row">
+        <div class="card n"><div class="cl">SIGNATURE-BASED</div><h3>مبتنی بر امضا</h3><p>نرخ تشخیص بالایی دارد، ولی حمله‌ی روز صفر را نمی‌بیند.</p></div>
+        <div class="card n"><div class="cl">ANOMALY-BASED</div><h3>مبتنی بر ناهنجاری</h3><p>حمله‌ی روز صفر را می‌بیند، ولی هشدار نادرست و مصرف منابع بیشتری دارد.</p></div>
+      </div>
+      <p class="small muted">تعداد زیاد ویژگی یکی از دلیل‌های سنگینی مدل است و کاهش ابعاد <span class="en">(Dimensionality Reduction)</span> این هزینه را کم می‌کند.</p>
+    </div>
+    <div class="dark">
+      <div class="k">TWO VIEWS OF “LIGHTWEIGHT”</div>
+      <p style="margin-top:10px">مقاله‌ی اصلی سبک بودن را با <span class="hl">نسبت تعداد ویژگی‌ها</span> می‌سنجد.</p>
+      <p style="margin-top:14px">مقاله‌ی پشتیبان <span class="hl">حجم مدل، زمان استنتاج و RAM</span> را روی Raspberry Pi اندازه می‌گیرد.</p>
+      <p style="margin-top:14px;color:#e09a52">کاهش تعداد ویژگی همیشه به مدل سبک‌تر نمی‌رسد.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-sec="مقدمه" data-n="۰۱" data-lat="INTRODUCTION · DATASET">
+  <div class="ttl"><div><h2>Edge-IIoTset با ۴۲ ویژگی و شش کلاس نامتوازن پایه‌ی کار است.</h2><span class="tl">EDGE-IIoTSET · ML VERSION</span></div></div>
+  <div class="row">
+    <div class="col-2">
+      <table>
+        <thead><tr><th>کلاس</th><th class="c">تعداد</th><th class="c">سهم (٪)</th><th style="width:34%"></th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td class="c">۲۴٬۳۰۱</td><td class="c">۱۵٫۴</td><td><span class="bar" style="width:49%"></span></td></tr>
+          <tr><td>DDoS</td><td class="c">۴۹٬۳۹۶</td><td class="c">۳۱٫۳</td><td><span class="bar" style="width:100%"></span></td></tr>
+          <tr><td>Information gathering</td><td class="c">۲۱٬۱۴۸</td><td class="c">۱۳٫۴</td><td><span class="bar" style="width:43%"></span></td></tr>
+          <tr class="o"><td>MITM</td><td class="c">۱٬۲۱۴</td><td class="c">۰٫۸</td><td><span class="bar" style="width:2.5%"></span></td></tr>
+          <tr><td>Injection</td><td class="c">۳۰٬۶۳۲</td><td class="c">۱۹٫۴</td><td><span class="bar" style="width:62%"></span></td></tr>
+          <tr><td>Malware</td><td class="c">۳۱٬۱۰۹</td><td class="c">۱۹٫۷</td><td><span class="bar" style="width:63%"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="stack">
+      <div class="stat"><span class="v">۱۵۷٬۸۰۰</span><span class="d">رکورد در نسخه‌ی ML دیتاست وجود دارد.</span></div>
+      <div class="stat"><span class="v">۶۱ ← ۴۲</span><span class="d">ویژگی پس از حذف ۱۹ ستون زائد می‌ماند.</span></div>
+      <div class="stat o"><span class="v">۵٬۵۵۵</span><span class="d">ردیف پس از حذف ستون‌ها تکراری می‌شوند.</span></div>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:20px">پانزده نوع حمله با گروه‌بندی Ferrag در شش کلاس قرار می‌گیرند. کلاس MITM کمتر از یک درصد داده است.</p>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-sec="مرور مقاله‌ها" data-n="۰۲" data-lat="MAIN PAPER · FI-SEL METHOD">
+  <div class="ttl"><div class="big">۰۲</div><div><h2>مقاله‌ی اصلی با FI هشت ویژگی برمی‌دارد و آن‌ها را به SEL می‌دهد.</h2><span class="tl">ABDULKAREEM ET AL. 2024 · JNCA</span></div></div>
+  <div class="flow">
+    <div class="st"><div class="s1">PREPROCESS</div><div class="s2">۴۲ ویژگی</div><div class="s3">نرمال‌سازی min–max و تقسیم ۸۰ به ۲۰</div></div>
+    <div class="ar">←</div>
+    <div class="st gr"><div class="s1">FEATURE IMPORTANCE</div><div class="s2">FI با ExtraTrees</div><div class="s3">آنتروپی، نگه داشتن <span class="ltr">k=8</span> ویژگی برتر</div></div>
+    <div class="ar">←</div>
+    <div class="st"><div class="s1">BASE LEARNERS</div><div class="s2">NB و LR</div><div class="s3">پیش‌بینی برچسب کلاس</div></div>
+    <div class="ar">←</div>
+    <div class="st dk"><div class="s1">META-LEARNER</div><div class="s2">DT</div><div class="s3">پیش‌بینی‌ها به‌اضافه‌ی ویژگی‌ها، شش کلاس</div></div>
+  </div>
+  <div class="row" style="margin-top:28px">
+    <div class="col-2">
+      <p class="small muted" style="margin-bottom:10px">هشت ویژگی برتر FI مقاله همه از لایه‌ی TCP هستند:</p>
+      <div class="pills">
+        <span class="pill f">tcp.dstport</span><span class="pill f">tcp.ack</span><span class="pill f">tcp.seq</span><span class="pill f">tcp.len</span>
+        <span class="pill f">tcp.checksum</span><span class="pill f">tcp.ack_raw</span><span class="pill f">tcp.flags</span><span class="pill f">tcp.flags.ack</span>
+      </div>
+    </div>
+    <div class="tint o"><p class="small"><span class="tag o">ابهام</span> طبق الگوریتم ۱، احتمال نشت وجود دارد، ولی متن ص. ۴ می‌گوید پیش‌بینی‌ها به داده‌ی آموزش اضافه می‌شوند.</p></div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-sec="مرور مقاله‌ها" data-n="۰۲" data-lat="MAIN PAPER · RESULTS">
+  <div class="ttl"><div><h2>مقاله با ۸ ویژگی به macro-F1 برابر ۸۰٫۸۸ می‌رسد و ۸۶٫۹ درصد کاهش حجم را ادعا می‌کند.</h2><span class="tl">REPORTED RESULTS · TABLES 5, 6 AND 9</span></div></div>
+  <div class="row">
+    <div class="col-2">
+      <table>
+        <thead><tr><th>معیار</th><th class="c">همه‌ی ویژگی‌ها (۴۲)</th><th class="c"><span class="ltr">k=8</span></th></tr></thead>
+        <tbody>
+          <tr><td>Accuracy</td><td class="c">۸۹٫۰۵</td><td class="c">۸۷٫۳۷</td></tr>
+          <tr><td>macro-F1</td><td class="c">۸۲٫۰۰</td><td class="c">۸۰٫۸۸</td></tr>
+          <tr><td>زمان آموزش (s)</td><td class="c">۳۷٫۲۳</td><td class="c">۱۶٫۱۸</td></tr>
+          <tr><td>زمان آزمون (s)</td><td class="c">۰٫۲۸</td><td class="c">۰٫۱۰</td></tr>
+        </tbody>
+      </table>
+      <p class="small muted" style="margin-top:14px">مقاله افت دقت با کاهش ویژگی‌ها را ناچیز می‌داند و k=8 را به‌دلیل زمان کمتر انتخاب کرده است.</p>
+    </div>
+    <div class="stack">
+      <div class="card o"><div class="cl">CLAIMED SIZE REDUCTION</div><div class="stat o"><span class="v">۸۶٫۹٪</span><span class="d">این عدد با ۱ − ۸/۶۱ می‌خواند و حجم اندازه‌گیری نشده است.</span></div></div>
+      <div class="row">
+        <div class="stat o"><span class="v">۲۹٫۲۲</span><span class="d">recall کلاس MITM</span></div>
+        <div class="stat"><span class="v">۶۰٫۳۸</span><span class="d">macro-F1 مدل DT تنها</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-sec="مرور مقاله‌ها" data-n="۰۲" data-lat="SUPPORT PAPER · PERMUTATION FI">
+  <div class="ttl"><div><h2>مقاله‌ی پشتیبان PFI را جایگزینی ساده برای انتخاب ویژگی نشان می‌دهد.</h2><span class="tl">GARCÍA-MERINO ET AL. 2026 · PEERJ CS</span></div></div>
+  <div class="row">
+    <div class="stack">
+      <p>این مقاله مدل را ثابت نگه می‌دارد و پنج روش کاهش ابعاد را مقایسه می‌کند.</p>
+      <ul class="sq">
+        <li>مدل RF با ۲۰ درخت است.</li>
+        <li>روش‌ها χ²، MI، PFI، PCA و GA هستند.</li>
+        <li>آزمایش روی سرور و روی Raspberry Pi انجام شده است.</li>
+      </ul>
+      <div class="tint"><p class="small">اهمیت ویژگی جایگشتی <span class="en">(Permutation Feature Importance، PFI)</span> افت عملکرد مدل را پس از به‌هم‌ریختن مقدارهای یک ویژگی روی داده‌ی نادیده می‌سنجد.</p></div>
+    </div>
+    <div class="col-2">
+      <table>
+        <thead><tr><th>روش</th><th class="c">ویژگی</th><th class="c">Accuracy (٪)</th><th class="c">حجم مدل (MB)</th></tr></thead>
+        <tbody>
+          <tr><td>Base RF</td><td class="c">۴۳</td><td class="c">۹۸٫۸۷</td><td class="c">۸۵٫۶۱</td></tr>
+          <tr><td>MI</td><td class="c">۱۶</td><td class="c">۹۸٫۸۵</td><td class="c">۸۳٫۲۴</td></tr>
+          <tr><td style="color:var(--green)">PFI</td><td class="c">۱۴</td><td class="c">۹۸٫۹۷</td><td class="c hl">۴۷٫۵۴</td></tr>
+          <tr><td>PCA</td><td class="c">۲۲</td><td class="c">۹۸٫۷۱</td><td class="c">۸۷٫۱۳</td></tr>
+        </tbody>
+      </table>
+      <p class="small muted" style="margin-top:14px">MI با ۱۶ ویژگی تقریباً هم‌حجم مدل پایه است، ولی PFI حجم را حدود ۴۵ درصد کم کرده است. پس تعداد ویژگی کمتر لزوماً حجم کمتر نمی‌دهد.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide" data-sec="بازپیاده‌سازی" data-n="۰۳" data-lat="REIMPLEMENTATION · GOALS">
+  <div class="ttl"><div class="big">۰۳</div><div><h2>ما FI-SEL را دوباره ساختیم و آن را با PFI، MI و PCA مقایسه کردیم.</h2><span class="tl">WHAT THIS SEMINAR DOES</span></div></div>
+  <div class="row">
+    <div class="card"><div class="cl">01 · REBUILD</div><h3>بازپیاده‌سازی</h3><p>روش مقاله از روی متن آن ساخته شد، چون کد نویسندگان منتشر نشده است.</p></div>
+    <div class="card"><div class="cl">02 · REPLACE</div><h3>جایگزینی FI با PFI</h3><p>FI و PFI روی همان ExtraTrees و در شرایط یکسان مقایسه شدند.</p></div>
+    <div class="card"><div class="cl">03 · MEASURE</div><h3>اندازه‌گیری هزینه</h3><p>حجم واقعی pipeline و زمان آموزش و آزمون اندازه گرفته شد.</p></div>
+    <div class="card o"><div class="cl">04 · CRITIQUE</div><h3>سنجش ادعاها</h3><p>ادعاهای مقاله با شاهد از متن و از نتیجه‌ی آزمایش نقد شد.</p></div>
+  </div>
+  <div class="dark" style="margin-top:26px">
+    <div class="k">WHY PFI</div>
+    <p style="margin-top:8px">PFI در مقاله‌ی پشتیبان روی همین دیتاست بهترین توازن دقت و کارایی را داشت. این روش افت macro-F1 را روی داده‌ی نادیده می‌سنجد، در حالی که FI از ساختار درخت‌های آموزش‌دیده می‌آید.</p>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-sec="بازپیاده‌سازی" data-n="۰۳" data-lat="REIMPLEMENTATION · PROTOCOL">
+  <div class="ttl"><div><h2>پنج seed، تقسیم stratified و نسخه‌ی بدون نشت پایه‌ی همه‌ی مقایسه‌ها هستند.</h2><span class="tl">SPLIT, MODEL AND PROTOCOL</span></div></div>
+  <div class="split">
+    <div class="fit">بخش fit<small>۱۰۰٬۹۹۲ ردیف · رتبه‌بندی ویژگی‌ها</small></div>
+    <div class="val">اعتبارسنجی<small>۲۵٬۲۴۸ · PFI</small></div>
+    <div class="tst">آزمون<small>۳۱٬۵۶۰ · فقط گزارش</small></div>
+  </div>
+  <p class="small muted" style="margin-top:10px">مدل‌های نهایی روی کل داده‌ی آموزش، یعنی بخش fit به‌اضافه‌ی اعتبارسنجی، آموزش می‌بینند.</p>
+  <div class="row" style="margin-top:22px">
+    <div class="card">
+      <div class="cl">LEAKAGE-FREE SEL</div>
+      <h3>مدل نهایی داده‌ی آزمون را نمی‌بیند.</h3>
+      <p><code>StackingClassifier</code> با <code>passthrough=True</code> و <code>stack_method="predict"</code> ساخته شد. اعتبارسنجی متقابل پنج‌بخشی پیش‌بینی‌های خارج از fold را برای مدل نهایی می‌سازد.</p>
+    </div>
+    <div class="card n">
+      <div class="cl">PROTOCOL</div>
+      <h3>هر آزمایش پنج بار تکرار شد.</h3>
+      <ul class="sq">
+        <li>seedها ۴۲، ۰، ۱، ۲ و ۳ هستند و نتیجه میانگین ± انحراف معیار است.</li>
+        <li>ابرپارامترها پیش‌فرض scikit-learn هستند.</li>
+        <li>همه‌ی اجراها روی MacBook Air M4 انجام شدند.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-sec="نتایج" data-n="۰۴" data-lat="RESULTS · COMPARISON WITH THE PAPER">
+  <div class="ttl"><div class="big">۰۴</div><div><h2>نسخه‌ی بدون نشت ما اعداد مقاله را تقریباً تکرار می‌کند (۸۲٫۵۷ در برابر ۸۲٫۰۰).</h2><span class="tl">FI-SEL · OURS VS TABLE 9</span></div></div>
+  <div class="row">
+    <div class="col-2">
+      <table>
+        <thead><tr><th>معیار</th><th class="c">مقاله، همه</th><th class="c">ما، همه</th><th class="c">مقاله، <span class="ltr">k=8</span></th><th class="c">ما، <span class="ltr">k=8</span></th></tr></thead>
+        <tbody>
+          <tr><td>Accuracy</td><td class="c">۸۹٫۰۵</td><td class="c">۸۹٫۲۵ ± ۰٫۰۷</td><td class="c">۸۷٫۳۷</td><td class="c">۸۷٫۷۲ ± ۰٫۱۱</td></tr>
+          <tr><td>macro-F1</td><td class="c">۸۲٫۰۰</td><td class="c hl">۸۲٫۵۷ ± ۰٫۲۴</td><td class="c">۸۰٫۸۸</td><td class="c hl">۸۱٫۵۹ ± ۰٫۱۹</td></tr>
+          <tr><td>نسبت زمان آموزش</td><td class="c">–</td><td class="c">–</td><td class="c">۰٫۴۳</td><td class="c">۰٫۵۸</td></tr>
+          <tr class="o"><td>نسبت حجم pipeline</td><td class="c">–</td><td class="c">–</td><td class="c">–</td><td class="c">۱٫۰۰</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="stack">
+      <div class="stat"><span class="v">کمتر از ۱</span><span class="d">واحد درصد فاصله‌ی همه‌ی معیارهای کیفیت با مقاله است.</span></div>
+      <div class="stat"><span class="v">۸ از ۸</span><span class="d">ویژگی برتر FI ما همان ویژگی‌های مقاله هستند.</span></div>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:20px">زمان‌های مطلق روی سخت‌افزار دیگری اندازه گرفته شده‌اند، پس مقایسه‌ی زمان فقط روی نسبت‌ها انجام می‌شود.</p>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-sec="نتایج" data-n="۰۴" data-lat="RESULTS · K-SWEEP">
+  <div class="ttl"><div><h2>PFI در <span class="ltr">k=8</span> به ۸۲٫۲۵ می‌رسد و تقریباً با همه‌ی ویژگی‌ها برابر است.</h2><span class="tl">MACRO-F1 BY NUMBER OF FEATURES · FI VS PFI</span></div></div>
+  <div class="row">
+    <figure class="col-2"><img src="../../ids-fisel-pfi/results/figures/f1_macro_vs_k.png" alt="" style="height:400px"><figcaption>macro-F1 مدل SEL بر حسب k، میانگین پنج seed</figcaption></figure>
+    <div class="stack" style="flex:.9">
+      <div class="stat"><span class="v" style="color:var(--pfi)">۸۲٫۲۵ ± ۰٫۱۹</span><span class="d">PFI-SEL با <span class="ltr">k=8</span></span></div>
+      <div class="stat"><span class="v" style="color:var(--fi)">۸۱٫۵۹ ± ۰٫۱۹</span><span class="d">FI-SEL با <span class="ltr">k=8</span></span></div>
+      <div class="stat"><span class="v" style="color:var(--gray-d)">۸۲٫۵۷ ± ۰٫۲۴</span><span class="d">همه‌ی ۴۲ ویژگی</span></div>
+      <p class="small muted">در k=6 و k=7 واریانس زیاد است، چون ترتیب درونی هشت ویژگی برتر با seed عوض می‌شود.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-sec="نتایج" data-n="۰۴" data-lat="RESULTS · FEATURE RANKING">
+  <div class="ttl"><div><h2>هشت ویژگی برتر FI همان هشت ویژگی مقاله‌اند و PFI پنج تا از آن‌ها را نگه می‌دارد.</h2><span class="tl">FI AND PFI RANKINGS · SEED 42</span></div></div>
+  <div class="row">
+    <figure class="col-2"><img src="../../ids-fisel-pfi/results/figures/importance_ranking_fi_pfi.png" alt="" style="height:405px"><figcaption>رتبه‌بندی FI و PFI، نام‌های پررنگ هشت ویژگی مقاله هستند</figcaption></figure>
+    <div class="stack" style="flex:.85">
+      <div>
+        <p class="small muted" style="margin-bottom:6px">PFI این سه ویژگی را بالا می‌آورد:</p>
+        <div class="pills"><span class="pill">icmp.seq_le</span><span class="pill">tcp.connection.rst</span><span class="pill">udp.stream</span></div>
+      </div>
+      <div>
+        <p class="small muted" style="margin-bottom:6px">و این سه را بیرون می‌گذارد:</p>
+        <div class="pills"><span class="pill f">tcp.ack_raw</span><span class="pill f">tcp.flags.ack</span><span class="pill f">tcp.checksum</span></div>
+      </div>
+      <p class="small">هر دو مجموعه در هر پنج seed ثابت می‌مانند.</p>
+      <div class="tint o"><p class="small">رتبه‌بندی PFI حدود ۱۱۷٫۵۰ ثانیه و FI حدود ۰٫۷۴ ثانیه طول می‌کشد.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-sec="نتایج" data-n="۰۴" data-lat="RESULTS · PER CLASS AND MITM">
+  <div class="ttl"><div><h2>Recall کلاس MITM حدود ۳۲ درصد می‌ماند، چون بیشتر ردیف‌های آن از کلاس‌های دیگر قابل تمایز نیستند.</h2><span class="tl">PER-CLASS RECALL · THE AMBIGUOUS VECTOR</span></div></div>
+  <div class="row">
+    <figure class="col-2"><img src="../../ids-fisel-pfi/results/figures/per_class_recall_k8.png" alt="" style="height:330px"><figcaption>recall هر کلاس برای SEL با <span class="ltr">k=8</span></figcaption></figure>
+    <div class="stack">
+      <div class="dark">
+        <div class="k">ALL-ZERO VECTOR</div>
+        <p style="margin-top:6px">بردار تمام‌صفر <span class="hl">۸۲۱</span> بار با MITM و <span class="hl">۱٬۹۲۶</span> بار با کلاس‌های دیگر آمده است.</p>
+        <p style="margin-top:8px">پس حدود ۶۸ درصد ردیف‌های MITM قابل تمایز نیستند و سقف recall ۳۲٫۳۷ درصد است.</p>
+      </div>
+      <div class="tint o"><p class="small">وزن‌دهی <code>balanced</code> و SMOTE این بردار را به MITM می‌دهند. Recall به ۱۰۰ می‌رسد، ولی precision به ۳٫۵۸ برای FI و ۲۳٫۶۱ برای PFI می‌افتد.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-sec="نتایج" data-n="۰۴" data-lat="RESULTS · TIME AND SIZE">
+  <div class="ttl"><div><h2>کم کردن ویژگی‌ها زمان آموزش را کم می‌کند، ولی حجم pipeline را نه.</h2><span class="tl">TRAINING TIME, PREDICTION TIME AND PIPELINE SIZE</span></div></div>
+  <figure><img src="../../ids-fisel-pfi/results/figures/cost_vs_k.png" alt="" style="height:290px"><figcaption>زمان آموزش، زمان آزمون و حجم pipeline بر حسب k، میانگین پنج seed</figcaption></figure>
+  <div class="row" style="margin-top:14px">
+    <div class="stat"><span class="v">۱۵٫۴۳ ← ۸٫۹۳ s</span><span class="d">زمان آموزش FI-SEL از همه‌ی ویژگی‌ها تا <span class="ltr">k=8</span></span></div>
+    <div class="stat o"><span class="v">۲٫۱۹ = ۲٫۱۹ MB</span><span class="d">حجم FI-SEL با <span class="ltr">k=8</span> و با همه‌ی ویژگی‌ها</span></div>
+    <div class="stat"><span class="v" style="color:var(--pfi)">۱٫۵۴ MB</span><span class="d">حجم PFI-SEL با <span class="ltr">k=8</span>، حدود ۳۰ درصد کمتر</span></div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="slide" data-sec="نتایج" data-n="۰۴" data-lat="RESULTS · LEAKAGE AND DUPLICATES">
+  <div class="ttl"><div><h2>نشت macro-F1 را به حدود ۹۰ می‌رساند و حذف تکراری‌ها آن را به حدود ۹۲.</h2><span class="tl">LEAKY VS LEAKAGE-FREE · DUPLICATE REMOVAL</span></div></div>
+  <div class="row">
+    <figure class="col-2"><img src="../../ids-fisel-pfi/results/figures/leaky_vs_clean.png" alt="" style="width:100%"><figcaption>macro-F1 و recall کلاس MITM در نسخه‌ی بدون نشت و نسخه‌ی دارای نشت</figcaption></figure>
+    <div class="stack">
+      <div class="card o"><div class="cl">LEAKY READING</div><p>نسخه‌ی دارای نشت به ۹۰٫۴۰ ± ۰٫۶۵ می‌رسد که حدود هشت واحد بالاتر از جدول ۹ است. پس برداشت لفظی الگوریتم ۱ اعداد مقاله را نمی‌سازد.</p></div>
+      <div class="card"><div class="cl">DUPLICATES REMOVED</div>
+        <table style="font-size:16px">
+          <tbody>
+            <tr><td>همه‌ی ویژگی‌ها</td><td class="c">۸۲٫۵۷ ← ۹۲٫۲۶</td></tr>
+            <tr><td>PFI، <span class="ltr">k=8</span></td><td class="c">۸۲٫۲۵ ← ۹۲٫۳۱</td></tr>
+            <tr><td>recall کلاس MITM</td><td class="c">۳۱٫۶۰ ← ۹۹٫۷۲</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="slide" data-sec="نقد و جمع‌بندی" data-n="۰۵" data-lat="CRITIQUE OF THE MAIN PAPER">
+  <div class="ttl"><div class="big">۰۵</div><div><h2>هشت نقد به اندازه‌گیری حجم، نشت، داده و برتری SEL وارد است.</h2><span class="tl">EIGHT CRITIQUES · SIX FROM THE TEXT, TWO FROM OUR RESULTS</span></div></div>
+  <div class="grid4">
+    <div class="crit"><div class="n">۱</div><h4>حجم اندازه‌گیری نشده است.</h4><p>عدد ۸۶٫۹ درصد از نسبت تعداد ویژگی‌ها آمده است.</p></div>
+    <div class="crit"><div class="n">۲</div><h4>احتمال نشت وجود دارد.</h4><p>الگوریتم ۱ با متن ص. ۴ ناسازگار است.</p></div>
+    <div class="crit"><div class="n">۳</div><h4>ضعف MITM بی‌راه‌حل مانده است.</h4><p>مقاله هیچ روشی برای عدم توازن به کار نبرده است.</p></div>
+    <div class="crit"><div class="n">۴</div><h4>سخت‌افزار واقعی آزموده نشده است.</h4><p>هیچ آزمایشی روی دستگاه کم‌منبع انجام نشده است.</p></div>
+    <div class="crit"><div class="n">۵</div><h4>ویژگی‌ها ممکن است به دیتاست وابسته باشند.</h4><p>همه‌ی آزمایش‌ها فقط روی <span class="nw">Edge-IIoTset</span> هستند.</p></div>
+    <div class="crit"><div class="n">۶</div><h4>کد و تنظیمات منتشر نشده‌اند.</h4><p>ابرپارامترها و seed در مقاله نیامده‌اند.</p></div>
+    <div class="crit g"><div class="n">۷</div><h4>تکراری‌ها و بردار مبهم نتیجه را پایین آورده‌اند.</h4><p>این شاهد از بازپیاده‌سازی ما آمده است.</p></div>
+    <div class="crit g"><div class="n">۸</div><h4>SEL از DT تنها بهتر نیست.</h4><p>DT تنها در کار ما به ۸۲٫۶۱ می‌رسد و SEL به ۸۲٫۵۷.</p></div>
+  </div>
+</section>
+
+<!-- 17 -->
+<section class="slide" data-sec="نقد و جمع‌بندی" data-n="۰۵" data-lat="CONCLUSION AND FUTURE WORK">
+  <div class="ttl"><div><h2>نتایج FI-SEL قابل تکرار است، ولی ادعای حجم و برتری SEL تأیید نمی‌شود.</h2><span class="tl">CONCLUSION AND FUTURE WORK</span></div></div>
+  <div class="row">
+    <div class="card"><div class="cl">CONFIRMED</div><h3>آنچه تکرار شد</h3>
+      <ul class="sq"><li>عددهای جدول ۹ با فاصله‌ی کمتر از یک واحد به دست آمدند.</li><li>PFI با هشت ویژگی کمی دقیق‌تر و سریع‌تر از FI بود.</li></ul></div>
+    <div class="card o"><div class="cl">NOT SUPPORTED</div><h3>آنچه تأیید نشد</h3>
+      <ul class="sq o"><li>حجم pipeline با کاهش ویژگی‌ها کم نشد.</li><li>DT تنها و SEL همگن هم‌اندازه‌ی SEL بودند.</li><li>ضعف MITM از داده می‌آید.</li></ul></div>
+    <div class="card n"><div class="cl">FUTURE WORK</div><h3>کار آینده</h3>
+      <ul class="sq"><li>اجرا روی دیتاست دوم مثل CICIoT2023</li><li>اندازه‌گیری روی Raspberry Pi</li><li>شناسایی بردارهای مبهم پیش از آموزش</li></ul></div>
+  </div>
+  <div class="dark" style="margin-top:24px"><p>سبک بودن را باید با اندازه‌گیری مستقیم حجم و زمان سنجید، نه با شمردن ویژگی‌ها.</p></div>
+</section>
+
+<!-- 18 -->
+<section class="slide cover end">
+  <div class="cv-label" style="margin-top:0"><span class="a">{{latinTitle}}</span><span class="b">THANK YOU · QUESTIONS</span></div>
+  <div class="end-title">سپاس از توجه شما</div>
+  <div class="end-sub">آماده‌ی پرسش‌ها هستم.</div>
+  <div class="cv-rule"></div>
+  <div class="end-links">
+    <div>کد بازپیاده‌سازی در پوشه‌ی <span class="mono">ids-fisel-pfi</span> و گزارش کامل در <span class="mono">seminar-report.pdf</span> آمده‌اند.</div>
+  </div>
+  <div class="cv-bottom">
+    <div class="people">
+      <div><span class="role">دانشجو</span><span class="name">{{author}}</span></div>
+      <div><span class="role">استاد درس</span><span class="name">{{supervisor}}</span></div>
+    </div>
+    {{coverArt}}
+  </div>
+</section>
+
+</body>
+</html>

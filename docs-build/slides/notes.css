@@ -1,0 +1,38 @@
+/* Speaker notes: simple version of the design-reference style. */
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Light.ttf"); font-weight: 300; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-ExtraBold.ttf"); font-weight: 800; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Black.ttf"); font-weight: 900; }
+@font-face { font-family: "Instrument Sans"; src: url("../../fonts/latin/InstrumentSans-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../fonts/latin/JetBrainsMono-Regular.ttf"); font-weight: 400; }
+
+@page {
+  size: A4; margin: 22mm 20mm 20mm;
+  background: #fbf9f4;
+  @top-left { content: "LIGHTWEIGHT IoT INTRUSION DETECTION · SPEAKER NOTES"; font-family: "Instrument Sans"; font-weight: 700; font-size: 6.8pt; letter-spacing: .18em; color: #7b8191; vertical-align: bottom; padding-bottom: 6mm; }
+  @top-right { content: "متن گفتاری ارائه"; font-family: "Vazirmatn"; font-size: 7.5pt; color: #7b8191; vertical-align: bottom; padding-bottom: 6mm; }
+  @bottom-center { content: counter(page, persian); font-family: "Vazirmatn"; font-weight: 700; font-size: 10pt; color: #0b6e66; vertical-align: top; padding-top: 6mm; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #fbf9f4; }
+body { font-family: "Vazirmatn", "Instrument Sans", "JetBrains Mono", sans-serif; color: #111a2b; direction: rtl; font-size: 11.5pt; line-height: 2; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+.cover-note { background: #111a2b; color: #fff; border-radius: 3mm; padding: 9mm 10mm 8mm; margin-bottom: 9mm; }
+.cover-note .lab { font-family: "Instrument Sans"; font-weight: 700; font-size: 7pt; letter-spacing: .28em; direction: ltr; text-align: right; }
+.cover-note .lab .a { color: #3fb5a6; margin-right: 3mm; }
+.cover-note .lab .b { color: #e09a52; }
+.cover-note h1 { font-weight: 900; font-size: 24pt; margin: 3mm 0 0; line-height: 1.4; }
+.cover-note .sub { font-weight: 300; font-size: 12pt; color: #d5dbe5; }
+.cover-note .by { margin-top: 3mm; padding-top: 3mm; border-top: .6pt solid #3a4356; font-size: 9.5pt; color: #7fd1c4; }
+
+.note { break-inside: avoid; margin-bottom: 7mm; padding-bottom: 5mm; border-bottom: .6pt solid #d8d2c4; }
+.note:last-child { border-bottom: none; }
+.nh { display: flex; gap: 5mm; align-items: center; margin-bottom: 2mm; break-after: avoid; }
+.nn { font-weight: 900; font-size: 26pt; line-height: 1; color: #0b6e66; flex: none; }
+.nh h2 { margin: 0; font-weight: 800; font-size: 13pt; line-height: 1.6; }
+.nh .meta { font-size: 8.5pt; color: #7b8191; }
+.note p { margin: 0 0 2.5mm; text-align: justify; orphans: 2; widows: 2; }
+
+.nw { white-space: nowrap; }
+code { font-family: "JetBrains Mono", monospace; font-size: .85em; direction: ltr; unicode-bidi: isolate; color: #0b6e66; }
