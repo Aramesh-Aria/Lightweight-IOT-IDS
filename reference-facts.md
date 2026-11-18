@@ -33,8 +33,9 @@
 - FI با `ExtraTreesClassifier(criterion="entropy")` و `feature_importances_` محاسبه می‌شود.
 - مقادیر k این‌ها هستند: {5, 6, 7, 8, 10, 15, 20} و حالت همه‌ی ویژگی‌ها.
 - مقاله k=8 را انتخاب کرده است. هشت ویژگی برتر مقاله این‌ها هستند: tcp.dstport، tcp.ack، tcp.seq، tcp.len، tcp.checksum، tcp.ack_raw، tcp.flags و tcp.flags.ack.
-- SEL معادل `StackingClassifier(estimators=[GaussianNB, LogisticRegression], final_estimator=DecisionTreeClassifier, passthrough=True)` است.
-- الگوریتم ۱ مقاله مدل نهایی را روی پیش‌بینی‌های مدل‌های پایه روی داده‌ی آزمون آموزش می‌دهد. این همان نسخه‌ی دارای نشت است.
+- SEL معادل `StackingClassifier(estimators=[GaussianNB, LogisticRegression], final_estimator=DecisionTreeClassifier, passthrough=True, stack_method="predict")` است.
+- طبق الگوریتم ۱ (ص. ۵)، مدل نهایی روی پیش‌بینی‌های مدل‌های پایه روی داده‌ی آزمون آموزش می‌بیند. اما متن ص. ۴ می‌گوید پیش‌بینی‌ها به داده‌ی آموزش اضافه می‌شوند و متن ص. ۱۱ هم مبهم است. پس نشت در مقاله احتمالی است و قطعی نیست. در گزارش بنویسید «طبق الگوریتم ۱، احتمال نشت وجود دارد» و ناسازگاری ص. ۴ را هم ذکر کنید. نسخه‌ی دارای نشت ما همین برداشت از الگوریتم ۱ را پیاده می‌کند.
+- طبق جدول ۱۰ (ص. ۱۰)، مدل نهایی برچسب پیش‌بینی‌شده‌ی NB و LR را می‌گیرد (دو ستون `predictionNB` و `predictionLR`) و احتمال‌ها را نمی‌گیرد. به همین دلیل SEL ما با `stack_method="predict"` ساخته می‌شود (Q42).
 
 ## عددهای مقاله برای مقایسه
 
