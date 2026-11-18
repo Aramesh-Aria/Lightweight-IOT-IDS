@@ -1,0 +1,445 @@
+[
+  {
+    "id": "abdulkareem2024",
+    "type": "article-journal",
+    "author": [
+      {"family": "Abdulkareem", "given": "S. A."},
+      {"family": "Foh", "given": "C. H."},
+      {"family": "Carrez", "given": "F."},
+      {"family": "Moessner", "given": "K."}
+    ],
+    "title": "A lightweight SEL for attack detection in IoT/IIoT networks",
+    "container-title": "J. Netw. Comput. Appl.",
+    "volume": "230",
+    "number": "103980",
+    "issued": {"date-parts": [[2024]]},
+    "DOI": "10.1016/j.jnca.2024.103980",
+    "note": "main-paper.md, section 1"
+  },
+  {
+    "id": "garciamerino2026",
+    "type": "article-journal",
+    "author": [
+      {"family": "García-Merino", "given": "J. C."},
+      {"family": "Tobarra", "given": "L."},
+      {"family": "Robles-Gómez", "given": "A."},
+      {"family": "Pastor-Vargas", "given": "R."},
+      {"family": "Sarraipa", "given": "J."}
+    ],
+    "title": "A comparative study of dimensionality reduction techniques for intrusion detection in IoT networks",
+    "container-title": "PeerJ Comput. Sci.",
+    "volume": "12",
+    "number": "e3553",
+    "issued": {"date-parts": [[2026]]},
+    "DOI": "10.7717/peerj-cs.3553",
+    "note": "support-paper.md, section 1"
+  },
+  {
+    "id": "chaabouni2019",
+    "type": "article-journal",
+    "author": [
+      {"family": "Chaabouni", "given": "N."},
+      {"family": "Mosbah", "given": "M."},
+      {"family": "Zemmari", "given": "A."},
+      {"family": "Sauvignac", "given": "C."},
+      {"family": "Faruki", "given": "P."}
+    ],
+    "title": "Network intrusion detection for IoT security based on learning techniques",
+    "container-title": "IEEE Commun. Surv. Tutor.",
+    "volume": "21",
+    "issue": "3",
+    "page": "2671–2701",
+    "issued": {"date-parts": [[2019]]},
+    "note": "background-refs.md [1]"
+  },
+  {
+    "id": "santos2018",
+    "type": "paper-conference",
+    "author": [
+      {"family": "Santos", "given": "L."},
+      {"family": "Rabadao", "given": "C."},
+      {"family": "Gonçalves", "given": "R."}
+    ],
+    "title": "Intrusion detection systems in Internet of Things: A literature review",
+    "container-title": "Proc. 13th Iberian Conf. Inf. Syst. Technol. (CISTI)",
+    "page": "1–7",
+    "issued": {"date-parts": [[2018]]},
+    "note": "background-refs.md [2]"
+  },
+  {
+    "id": "chandola2009",
+    "type": "article-journal",
+    "author": [
+      {"family": "Chandola", "given": "V."},
+      {"family": "Banerjee", "given": "A."},
+      {"family": "Kumar", "given": "V."}
+    ],
+    "title": "Anomaly detection: A survey",
+    "container-title": "ACM Comput. Surv.",
+    "volume": "41",
+    "issue": "3",
+    "page": "1–58",
+    "issued": {"date-parts": [[2009]]},
+    "note": "background-refs.md [3]"
+  },
+  {
+    "id": "ferrag2022agri",
+    "type": "article-journal",
+    "author": [
+      {"family": "Ferrag", "given": "M. A."},
+      {"family": "Shu", "given": "L."},
+      {"family": "Friha", "given": "O."},
+      {"family": "Yang", "given": "X."}
+    ],
+    "title": "Cyber security intrusion detection for agriculture 4.0: Machine learning-based solutions, datasets, and future directions",
+    "container-title": "IEEE/CAA J. Autom. Sin.",
+    "volume": "9",
+    "issue": "3",
+    "page": "407–436",
+    "issued": {"date-parts": [[2022]]},
+    "DOI": "10.1109/jas.2021.1004344",
+    "note": "background-refs.md [4]; year from Crossref (both papers write 2021)"
+  },
+  {
+    "id": "gyamfi2022",
+    "type": "article-journal",
+    "author": [
+      {"family": "Gyamfi", "given": "E."},
+      {"family": "Jurcut", "given": "A."}
+    ],
+    "title": "Intrusion detection in Internet of Things systems: A review on design approaches leveraging multi-access edge computing, machine learning, and datasets",
+    "container-title": "Sensors",
+    "volume": "22",
+    "issue": "10",
+    "number": "3744",
+    "issued": {"date-parts": [[2022]]},
+    "DOI": "10.3390/s22103744",
+    "note": "background-refs.md [5]"
+  },
+  {
+    "id": "ferrag2022edge",
+    "type": "article-journal",
+    "author": [
+      {"family": "Ferrag", "given": "M. A."},
+      {"family": "Friha", "given": "O."},
+      {"family": "Hamouda", "given": "D."},
+      {"family": "Maglaras", "given": "L."},
+      {"family": "Janicke", "given": "H."}
+    ],
+    "title": "Edge-IIoTset: A new comprehensive realistic cyber security dataset of IoT and IIoT applications for centralized and federated learning",
+    "container-title": "IEEE Access",
+    "volume": "10",
+    "page": "40281–40306",
+    "issued": {"date-parts": [[2022]]},
+    "DOI": "10.1109/access.2022.3165809",
+    "note": "background-refs.md [6]"
+  },
+  {
+    "id": "tavallaee2009",
+    "type": "paper-conference",
+    "author": [
+      {"family": "Tavallaee", "given": "M."},
+      {"family": "Bagheri", "given": "E."},
+      {"family": "Lu", "given": "W."},
+      {"family": "Ghorbani", "given": "A. A."}
+    ],
+    "title": "A detailed analysis of the KDD CUP 99 data set",
+    "container-title": "Proc. IEEE Symp. Comput. Intell. Secur. Def. Appl.",
+    "page": "1–6",
+    "issued": {"date-parts": [[2009]]},
+    "note": "background-refs.md [7]"
+  },
+  {
+    "id": "koroniotis2019",
+    "type": "article-journal",
+    "author": [
+      {"family": "Koroniotis", "given": "N."},
+      {"family": "Moustafa", "given": "N."},
+      {"family": "Sitnikova", "given": "E."},
+      {"family": "Turnbull", "given": "B."}
+    ],
+    "title": "Towards the development of realistic botnet dataset in the internet of things for network forensic analytics: Bot-IoT dataset",
+    "container-title": "Future Gener. Comput. Syst.",
+    "volume": "100",
+    "page": "779–796",
+    "issued": {"date-parts": [[2019]]},
+    "DOI": "10.1016/j.future.2019.05.041",
+    "note": "background-refs.md [8]"
+  },
+  {
+    "id": "neto2023",
+    "type": "article-journal",
+    "author": [
+      {"family": "Neto", "given": "E. C. P."},
+      {"family": "Dadkhah", "given": "S."},
+      {"family": "Ferreira", "given": "R."},
+      {"family": "Zohourian", "given": "A."},
+      {"family": "Lu", "given": "R."},
+      {"family": "Ghorbani", "given": "A. A."}
+    ],
+    "title": "CICIoT2023: A real-time dataset and benchmark for large-scale attacks in IoT environment",
+    "container-title": "Sensors",
+    "volume": "23",
+    "issue": "13",
+    "number": "5941",
+    "issued": {"date-parts": [[2023]]},
+    "DOI": "10.3390/s23135941",
+    "note": "background-refs.md [9]"
+  },
+  {
+    "id": "moustafa2021",
+    "type": "article-journal",
+    "author": [
+      {"family": "Moustafa", "given": "N."}
+    ],
+    "title": "A new distributed architecture for evaluating AI-based security systems at the edge: Network TON_IoT datasets",
+    "container-title": "Sustain. Cities Soc.",
+    "volume": "72",
+    "number": "102994",
+    "issued": {"date-parts": [[2021]]},
+    "DOI": "10.1016/j.scs.2021.102994",
+    "note": "background-refs.md [10]"
+  },
+  {
+    "id": "wolpert1992",
+    "type": "article-journal",
+    "author": [
+      {"family": "Wolpert", "given": "D. H."}
+    ],
+    "title": "Stacked generalization",
+    "container-title": "Neural Netw.",
+    "volume": "5",
+    "issue": "2",
+    "page": "241–259",
+    "issued": {"date-parts": [[1992]]},
+    "DOI": "10.1016/S0893-6080(05)80023-1",
+    "note": "background-refs.md [11]; Crossref"
+  },
+  {
+    "id": "abbas2022",
+    "type": "article-journal",
+    "author": [
+      {"family": "Abbas", "given": "A."},
+      {"family": "Khan", "given": "M. A."},
+      {"family": "Latif", "given": "S."},
+      {"family": "Ajaz", "given": "M."},
+      {"family": "Shah", "given": "A. A."},
+      {"family": "Ahmad", "given": "J."}
+    ],
+    "title": "A new ensemble-based intrusion detection system for internet of things",
+    "container-title": "Arab. J. Sci. Eng.",
+    "volume": "47",
+    "issue": "2",
+    "page": "1805–1819",
+    "issued": {"date-parts": [[2022]]},
+    "note": "background-refs.md [12]"
+  },
+  {
+    "id": "rashid2022",
+    "type": "article-journal",
+    "author": [
+      {"family": "Rashid", "given": "M."},
+      {"family": "Kamruzzaman", "given": "J."},
+      {"family": "Imam", "given": "T."},
+      {"family": "Wibowo", "given": "S."},
+      {"family": "Gordon", "given": "S."}
+    ],
+    "title": "A tree-based stacking ensemble technique with feature selection for network intrusion detection",
+    "container-title": "Appl. Intell.",
+    "volume": "52",
+    "issue": "9",
+    "page": "9768–9781",
+    "issued": {"date-parts": [[2022]]},
+    "note": "background-refs.md [13]"
+  },
+  {
+    "id": "rajagopal2020",
+    "type": "article-journal",
+    "author": [
+      {"family": "Rajagopal", "given": "S."},
+      {"family": "Kundapur", "given": "P. P."},
+      {"family": "Hareesha", "given": "K. S."}
+    ],
+    "title": "A stacking ensemble for network intrusion detection using heterogeneous datasets",
+    "container-title": "Secur. Commun. Netw.",
+    "volume": "2020",
+    "page": "1–9",
+    "issued": {"date-parts": [[2020]]},
+    "note": "background-refs.md [14]"
+  },
+  {
+    "id": "abdulkareem2022smote",
+    "type": "paper-conference",
+    "author": [
+      {"family": "Abdulkareem", "given": "S. A."},
+      {"family": "Foh", "given": "C. H."},
+      {"family": "Carrez", "given": "F."},
+      {"family": "Moessner", "given": "K."}
+    ],
+    "title": "SMOTE-stack for network intrusion detection in an IoT environment",
+    "container-title": "Proc. IEEE Symp. Comput. Commun. (ISCC)",
+    "page": "1–6",
+    "issued": {"date-parts": [[2022]]},
+    "note": "background-refs.md [15]"
+  },
+  {
+    "id": "sollich1995",
+    "type": "article-journal",
+    "author": [
+      {"family": "Sollich", "given": "P."},
+      {"family": "Krogh", "given": "A."}
+    ],
+    "title": "Learning with ensembles: How overfitting can be useful",
+    "container-title": "Adv. Neural Inf. Process. Syst.",
+    "volume": "8",
+    "issued": {"date-parts": [[1995]]},
+    "note": "background-refs.md [16]"
+  },
+  {
+    "id": "breiman2001",
+    "type": "article-journal",
+    "author": [
+      {"family": "Breiman", "given": "L."}
+    ],
+    "title": "Random forests",
+    "container-title": "Mach. Learn.",
+    "volume": "45",
+    "issue": "1",
+    "page": "5–32",
+    "issued": {"date-parts": [[2001]]},
+    "DOI": "10.1023/A:1010933404324",
+    "note": "background-refs.md [17]; Crossref"
+  },
+  {
+    "id": "strobl2007",
+    "type": "article-journal",
+    "author": [
+      {"family": "Strobl", "given": "C."},
+      {"family": "Boulesteix", "given": "A.-L."},
+      {"family": "Zeileis", "given": "A."},
+      {"family": "Hothorn", "given": "T."}
+    ],
+    "title": "Bias in random forest variable importance measures: Illustrations, sources and a solution",
+    "container-title": "BMC Bioinformatics",
+    "volume": "8",
+    "issue": "1",
+    "page": "1–21",
+    "issued": {"date-parts": [[2007]]},
+    "DOI": "10.1186/1471-2105-8-25",
+    "note": "background-refs.md [18]; Crossref"
+  },
+  {
+    "id": "altmann2010",
+    "type": "article-journal",
+    "author": [
+      {"family": "Altmann", "given": "A."},
+      {"family": "Toloşi", "given": "L."},
+      {"family": "Sander", "given": "O."},
+      {"family": "Lengauer", "given": "T."}
+    ],
+    "title": "Permutation importance: A corrected feature importance measure",
+    "container-title": "Bioinformatics",
+    "volume": "26",
+    "issue": "10",
+    "page": "1340–1347",
+    "issued": {"date-parts": [[2010]]},
+    "DOI": "10.1093/bioinformatics/btq134",
+    "note": "background-refs.md [19]; Crossref"
+  },
+  {
+    "id": "molnar2022",
+    "type": "book",
+    "author": [
+      {"family": "Molnar", "given": "C."}
+    ],
+    "title": "Interpretable Machine Learning",
+    "edition": "2",
+    "publisher": "Lulu.com",
+    "publisher-place": "North Carolina, USA",
+    "issued": {"date-parts": [[2022]]},
+    "note": "background-refs.md [20]"
+  },
+  {
+    "id": "li2024",
+    "type": "article-journal",
+    "author": [
+      {"family": "Li", "given": "J."},
+      {"family": "Othman", "given": "M. S."},
+      {"family": "Chen", "given": "H."},
+      {"family": "Yusuf", "given": "L. M."}
+    ],
+    "title": "Optimizing IoT intrusion detection system: Feature selection versus feature extraction in machine learning",
+    "container-title": "J. Big Data",
+    "volume": "11",
+    "issue": "1",
+    "number": "36",
+    "issued": {"date-parts": [[2024]]},
+    "DOI": "10.1186/s40537-024-00892-y",
+    "note": "background-refs.md [21]"
+  },
+  {
+    "id": "mohyeddine2023",
+    "type": "article-journal",
+    "author": [
+      {"family": "Mohy-Eddine", "given": "M."},
+      {"family": "Guezzaz", "given": "A."},
+      {"family": "Benkirane", "given": "S."},
+      {"family": "Azrour", "given": "M."}
+    ],
+    "title": "An efficient network intrusion detection model for IoT security using K-NN classifier and feature selection",
+    "container-title": "Multimed. Tools Appl.",
+    "volume": "82",
+    "issue": "15",
+    "page": "23615–23633",
+    "issued": {"date-parts": [[2023]]},
+    "DOI": "10.1007/s11042-023-14795-2",
+    "note": "background-refs.md [22]"
+  },
+  {
+    "id": "fatima2024",
+    "type": "article-journal",
+    "author": [
+      {"family": "Fatima", "given": "M."},
+      {"family": "Rehman", "given": "O."},
+      {"family": "Rahman", "given": "I. M."},
+      {"family": "Ajmal", "given": "A."},
+      {"family": "Park", "given": "S. J."}
+    ],
+    "title": "Towards ensemble feature selection for lightweight intrusion detection in resource-constrained IoT devices",
+    "container-title": "Future Internet",
+    "volume": "16",
+    "issue": "10",
+    "number": "368",
+    "issued": {"date-parts": [[2024]]},
+    "DOI": "10.3390/fi16100368",
+    "note": "background-refs.md [23]"
+  },
+  {
+    "id": "alhowaide2020",
+    "type": "paper-conference",
+    "author": [
+      {"family": "Alhowaide", "given": "A."},
+      {"family": "Alsmadi", "given": "I."},
+      {"family": "Tang", "given": "J."}
+    ],
+    "title": "PCA, random-forest and pearson correlation for dimensionality reduction in IoT IDS",
+    "container-title": "Proc. IEEE Int. IOT, Electron. Mechatronics Conf. (IEMTRONICS)",
+    "issued": {"date-parts": [[2020]]},
+    "note": "background-refs.md [24]"
+  },
+  {
+    "id": "guyon2003",
+    "type": "article-journal",
+    "author": [
+      {"family": "Guyon", "given": "I."},
+      {"family": "Elisseeff", "given": "A."}
+    ],
+    "title": "An introduction to variable and feature selection",
+    "container-title": "J. Mach. Learn. Res.",
+    "volume": "3",
+    "page": "1157–1182",
+    "issued": {"date-parts": [[2003]]},
+    "URL": "https://www.jmlr.org/papers/v3/guyon03a.html",
+    "note": "Phase 5 addition (Q51). Checked against jmlr.org page and PDF on 2026-11-18; definition of filter, wrapper and embedded on p. 1165, tree built-in selection on p. 1166"
+  }
+]
