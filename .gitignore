@@ -1,0 +1,8 @@
+ids-fisel-pfi/data/
+**/.venv/
+node_modules/
+main.pdf
+second.pdf
+.DS_Store
+__pycache__/
+.ipynb_checkpoints/
