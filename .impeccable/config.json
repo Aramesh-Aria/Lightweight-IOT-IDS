@@ -7,7 +7,7 @@
         "rule": "overused-font",
         "value": "instrument sans",
         "createdAt": "2026-11-18T22:20:58.442Z",
-        "reason": "project decision: design-reference.md fonts table assigns Instrument Sans to Latin labels and headings for all project PDFs"
+        "reason": "project spec: design-reference.md and decisions.md set Instrument Sans for Latin labels across all PDFs"
       }
     ]
   }
