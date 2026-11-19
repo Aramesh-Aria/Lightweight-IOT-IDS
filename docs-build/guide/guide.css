@@ -1,0 +1,179 @@
+/* Study guide: full design-reference style (dark cover, contents, chapter start, summary box), Vazirmatn body. */
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Light.ttf"); font-weight: 300; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Medium.ttf"); font-weight: 500; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-SemiBold.ttf"); font-weight: 600; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-ExtraBold.ttf"); font-weight: 800; }
+@font-face { font-family: "Vazirmatn"; src: url("../../fonts/Vazirmatn/Vazirmatn-Black.ttf"); font-weight: 900; }
+@font-face { font-family: "Instrument Sans"; src: url("../../fonts/latin/InstrumentSans-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Instrument Sans"; src: url("../../fonts/latin/InstrumentSans-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../fonts/latin/JetBrainsMono-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../fonts/latin/JetBrainsMono-Bold.ttf"); font-weight: 700; }
+
+:root {
+  --navy: #111a2b; --green: #0b6e66; --teal: #3fb5a6; --teal-l: #7fd1c4;
+  --orange: #b4530b; --orange-l: #e09a52; --brown: #8a3f08;
+  --paper: #fbf9f4; --soft: #f4f2ec; --soft2: #e9e4d8; --green-soft: #e2efec; --orange-soft: #f7eadb;
+  --gray: #7b8191; --gray-d: #3a4356; --rule: #d8d2c4; --rule-l: #e6e9ee;
+}
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 18mm;
+  background: #fbf9f4;
+  @top-left { content: "LIGHTWEIGHT IoT INTRUSION DETECTION · STUDY GUIDE"; font-family: "Instrument Sans"; font-weight: 700; font-size: 6.6pt; letter-spacing: .18em; color: #7b8191; vertical-align: bottom; padding-bottom: 5mm; }
+  @top-right { content: string(short); font-family: "Vazirmatn"; font-size: 7.5pt; color: #7b8191; vertical-align: bottom; padding-bottom: 5mm; }
+  @bottom-center { content: counter(page, persian); font-family: "Vazirmatn"; font-weight: 700; font-size: 10pt; color: #0b6e66; vertical-align: top; padding-top: 6mm; }
+}
+@page cover {
+  margin: 0; background: #111a2b;
+  @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: "Vazirmatn", "Instrument Sans", "JetBrains Mono", sans-serif;
+  font-size: 9.4pt; line-height: 1.85; color: var(--navy); direction: rtl; text-align: justify;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  string-set: short "راهنمای مطالعه · تشخیص نفوذ سبک‌وزن در IoT";
+}
+p { margin: 0 0 2.2mm; orphans: 2; widows: 2; }
+b { font-weight: 700; }
+a { color: inherit; text-decoration: none; }
+.en { color: var(--gray); }
+.nw { white-space: nowrap; }
+code {
+  font-family: "JetBrains Mono", monospace; font-size: .8em; direction: ltr; unicode-bidi: isolate;
+  background: var(--green-soft); border: .5pt solid #c9e0db; border-radius: 3px; padding: 0 .3em; white-space: nowrap; color: var(--navy);
+}
+
+/* ---------- cover ---------- */
+section.cover {
+  page: cover; break-after: page;
+  width: 210mm; height: 296.5mm; overflow: hidden; position: relative;
+  padding: 20mm 20mm 16mm;
+  background-color: var(--navy); color: #fff;
+  background-image: radial-gradient(rgba(255, 255, 255, .075) 1px, transparent 1.3px);
+  background-size: 7mm 7mm;
+  text-align: right;
+}
+.cv-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.cv-kw { font-family: "JetBrains Mono"; font-size: 7pt; line-height: 1.9; color: #8d96a8; border-left: .6pt solid #3a4356; padding-left: 3.5mm; text-align: left; direction: ltr; }
+.cv-label { margin-top: 16mm; font-family: "Instrument Sans"; font-weight: 700; font-size: 8pt; letter-spacing: .3em; direction: ltr; text-align: right; }
+.cv-label .a { color: var(--teal); margin-right: 3mm; }
+.cv-label .b { color: var(--orange-l); }
+.cv-title { font-weight: 900; font-size: 44pt; line-height: 1.25; margin: 5mm 0 0; }
+.cv-title2 { font-weight: 800; font-size: 22pt; line-height: 1.4; margin-top: 2mm; color: #fff; }
+.cv-sub { font-weight: 300; font-size: 17pt; margin-top: 2mm; color: #d5dbe5; line-height: 1.5; }
+.cv-rule { width: 32mm; height: 1.6pt; background: var(--orange-l); margin: 8mm 0 5mm; }
+.cv-desc { font-weight: 400; font-size: 10pt; line-height: 1.85; color: #c5ccd8; max-width: 125mm; }
+.cv-art { width: 100%; height: auto; margin-top: 10mm; direction: ltr; }
+.ca-mono { font-family: "JetBrains Mono"; font-size: 10px; fill: #8d96a8; }
+.ca-val { font-family: "JetBrains Mono"; font-size: 9px; fill: var(--orange-l); }
+.ca-bar { fill: none; stroke: var(--teal); stroke-width: 1.1; }
+.ca-bar.hi { fill: rgba(63, 181, 166, .18); stroke: var(--teal-l); }
+.ca-link { fill: none; stroke: var(--teal); stroke-width: 1.2; }
+.ca-link.dashed { stroke: var(--orange-l); stroke-dasharray: 4 4; }
+.ca-box { fill: none; stroke: var(--teal-l); stroke-width: 1.3; }
+.ca-box.meta { stroke: var(--orange-l); fill: rgba(224, 154, 82, .1); }
+.ca-lbl { font-family: "Instrument Sans"; font-weight: 700; font-size: 13px; fill: #fff; text-anchor: middle; }
+.ca-lbl.meta { fill: var(--orange-l); }
+.ca-sub { font-family: "JetBrains Mono"; font-size: 8px; fill: #8d96a8; text-anchor: middle; }
+.ca-dot { fill: var(--orange-l); }
+.cv-bottom { position: absolute; left: 20mm; right: 20mm; bottom: 16mm; display: flex; justify-content: space-between; align-items: flex-end; }
+.people div { display: flex; gap: 4mm; align-items: baseline; margin-top: 1.6mm; }
+.people .role { font-size: 8.5pt; color: var(--teal-l); width: 17mm; }
+.people .name { font-weight: 700; font-size: 11pt; }
+.people .inst { font-size: 8.5pt; color: #c5ccd8; margin-top: 3mm; }
+.feat-block { font-family: "JetBrains Mono"; font-size: 6.8pt; line-height: 1.75; color: #8d96a8; text-align: left; direction: ltr; }
+.fb-head { font-family: "Instrument Sans"; font-weight: 700; letter-spacing: .2em; font-size: 6.4pt; color: #9aa3b5; margin-bottom: 1mm; }
+.fb-row { display: flex; gap: 3mm; }
+.fb-i { color: var(--orange-l); }
+.fb-n { width: 26mm; color: #cfd6e0; }
+.fb-v { color: var(--teal); }
+
+/* ---------- contents ---------- */
+section.toc { break-after: page; }
+.toc-head { display: flex; align-items: baseline; gap: 5mm; padding-bottom: 4mm; border-bottom: 1.2pt solid var(--navy); margin-bottom: 2mm; }
+.toc-head h1 { font-weight: 900; font-size: 32pt; margin: 0; line-height: 1.1; }
+.toc-lat { font-family: "Instrument Sans"; font-weight: 700; font-size: 7.5pt; letter-spacing: .3em; color: var(--gray); }
+.toc-ch { padding: 4mm 0 3.5mm; border-bottom: .5pt solid var(--rule); break-inside: avoid; }
+.toc-main { display: flex; align-items: center; }
+.tc-num { font-weight: 900; font-size: 24pt; color: var(--green); width: 16mm; line-height: 1; }
+.tc-titles { display: flex; flex-direction: column; }
+.tc-title { font-weight: 800; font-size: 12.5pt; line-height: 1.4; }
+.tc-lat { font-family: "Instrument Sans"; font-weight: 700; font-size: 6.4pt; letter-spacing: .22em; color: var(--gray); direction: ltr; text-align: right; }
+.leader { flex: 1; border-bottom: 1pt dashed var(--rule); margin: 0 3mm; position: relative; top: -.35em; min-width: 6mm; }
+.pg { font-weight: 800; color: var(--green); min-width: 7mm; text-align: left; display: inline-block; }
+.toc-main .pg { font-size: 12pt; }
+.toc-secs { display: grid; grid-template-columns: 1fr 1fr; gap: .5mm 8mm; padding: 2mm 16mm 0 0; }
+.toc-sec { display: flex; align-items: baseline; font-size: 8.2pt; line-height: 1.6; color: var(--gray-d); }
+.ts-num { color: var(--green); font-weight: 700; margin-left: 2mm; white-space: nowrap; }
+.ts-title { flex: 1; }
+.ts-q { color: var(--gray); font-size: 7.4pt; margin-left: 2mm; white-space: nowrap; }
+.toc-sec .pg { font-size: 8.2pt; min-width: 5mm; font-weight: 600; color: var(--gray); }
+.toc-note { margin-top: 7mm; font-size: 8.6pt; line-height: 1.9; color: var(--gray-d); }
+.legend { display: flex; gap: 8mm; margin-top: 6mm; padding-top: 3.5mm; border-top: .5pt solid var(--rule); font-size: 7.8pt; color: var(--gray-d); }
+.legend span { display: flex; align-items: center; gap: 2mm; }
+.legend i { display: inline-block; width: 3.2mm; height: 3.2mm; border-radius: .6mm; }
+.legend .g i { background: var(--green); } .legend .o i { background: var(--orange); } .legend .n i { background: var(--navy); }
+
+/* ---------- chapter start ---------- */
+section.chapter { break-before: page; }
+.ch-head { display: flex; align-items: center; gap: 6mm; margin: 1mm 0 3mm; }
+.ch-num { font-weight: 900; font-size: 56pt; line-height: 1; color: var(--green); }
+.ch-titles h1 { font-weight: 900; font-size: 23pt; line-height: 1.3; margin: 0; }
+.ch-lat { font-family: "Instrument Sans"; font-weight: 700; font-size: 7.5pt; letter-spacing: .28em; color: var(--gray); margin-top: 1.5mm; direction: ltr; text-align: right; }
+.zigzag {
+  height: 7px; margin: 0 0 6mm;
+  background:
+    linear-gradient(135deg, var(--navy) 25%, transparent 25%) -4px 0 / 8px 7px,
+    linear-gradient(225deg, var(--navy) 25%, transparent 25%) -4px 0 / 8px 7px;
+  background-repeat: repeat-x;
+}
+.intro { font-size: 10pt; }
+
+/* ---------- sections and questions ---------- */
+h2 { font-weight: 800; font-size: 13pt; line-height: 1.4; margin: 4.5mm 0 0; padding-top: 3mm; border-top: .6pt solid var(--rule); break-after: avoid; }
+h2 .sec-num { color: var(--green); margin-left: 3mm; }
+.sec-lat { font-family: "Instrument Sans"; font-weight: 700; font-size: 6.6pt; letter-spacing: .2em; color: var(--gray); direction: ltr; text-align: right; margin: .5mm 0 2mm; break-after: avoid; }
+.qa { break-inside: avoid; margin: 0 0 1.5mm; }
+h3 { font-weight: 700; font-size: 10.6pt; line-height: 1.6; margin: 2.4mm 0 .6mm; display: flex; align-items: baseline; gap: 2.5mm; break-after: avoid; }
+h3 .dia { flex: none; display: inline-block; width: 6px; height: 6px; background: var(--green); transform: rotate(45deg); position: relative; top: -2px; }
+h3 .qn { flex: none; font-family: "JetBrains Mono"; font-weight: 700; font-size: 7pt; color: var(--green); background: var(--green-soft); border-radius: 2mm; padding: 0 2mm; line-height: 1.8; direction: ltr; }
+h3 .qt { flex: 1; }
+.qa.warn h3 .dia { background: var(--orange); }
+.qa.warn h3 .qn { color: var(--brown); background: var(--orange-soft); }
+.qa p { padding-right: 5mm; }
+
+/* ---------- cards ---------- */
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 3mm 0 4mm; break-inside: avoid; }
+.card { border: .6pt solid var(--rule-l); border-top: 2.4pt solid var(--green); background: #fff; border-radius: 0 0 2mm 2mm; padding: 3mm 4mm 3.2mm; }
+.card.o { border-top-color: var(--orange); }
+.card .cl { font-family: "Instrument Sans"; font-weight: 700; font-size: 6.6pt; letter-spacing: .2em; color: var(--green); direction: ltr; text-align: right; }
+.card.o .cl { color: var(--orange); }
+.card .ct { font-weight: 800; font-size: 10.5pt; margin: .5mm 0 1mm; }
+.card .cx { font-size: 8.6pt; line-height: 1.8; color: var(--gray-d); text-align: right; }
+
+/* ---------- table ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 8.4pt; line-height: 1.55; margin: 1mm 0 4mm; break-inside: avoid; }
+th { background: var(--navy); color: #fff; font-weight: 600; padding: 2mm; text-align: center; }
+th.w { background: var(--orange); }
+td { padding: 1.5mm 2mm; border-bottom: .5pt solid var(--rule-l); text-align: center; }
+td.first { font-weight: 700; text-align: right; }
+td.w { background: var(--orange-soft); color: var(--brown); text-align: right; }
+tbody tr:nth-child(even) td:not(.w) { background: var(--soft); }
+td.num { white-space: nowrap; }
+
+/* ---------- summary box ---------- */
+.summary { background: var(--navy); color: #fff; border-radius: 2mm; padding: 4mm 6mm 3.5mm; margin: 4mm 0 0; break-inside: avoid; }
+.sm-head { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 3mm; border-bottom: .6pt solid #3a4356; margin-bottom: 2mm; }
+.sm-head h4 { margin: 0; font-weight: 800; font-size: 12pt; }
+.sm-head span { font-family: "Instrument Sans"; font-weight: 700; font-size: 6.4pt; letter-spacing: .22em; color: #9aa3b5; }
+.sm-item { display: flex; gap: 5mm; align-items: flex-start; padding: 1.4mm 0; border-bottom: .5pt solid #232e44; }
+.sm-item:last-child { border-bottom: none; }
+.sm-n { font-weight: 900; font-size: 17pt; line-height: 1.2; color: var(--teal); width: 7mm; flex: none; }
+.sm-l { font-family: "Instrument Sans"; font-weight: 700; font-size: 7pt; letter-spacing: .22em; color: var(--orange-l); direction: ltr; text-align: right; }
+.sm-t { font-size: 8.8pt; line-height: 1.7; color: #e6e9ee; }

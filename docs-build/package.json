@@ -7,7 +7,9 @@
     "report:pdf": "node scripts/build.mjs pdf",
     "report:docx": "node scripts/build.mjs docx",
     "slides": "node scripts/build-slides.mjs",
-    "slides:review": "node scripts/build-slides.mjs --png"
+    "slides:review": "node scripts/build-slides.mjs --png",
+    "guide": "node scripts/build-guide.mjs",
+    "guide:review": "node scripts/build-guide.mjs --png"
   },
   "license": "UNLICENSED",
   "dependencies": {
