@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "docs-build/roadmap/roadmap.html"
+        ],
+        "createdAt": "2026-11-19T21:07:27.405Z",
+        "reason": "agent triage: tracking applies only to short uppercase Latin labels (WEEK 1, CHECKPOINT), same label style as the existing study guide"
+      }
+    ]
+  }
+}

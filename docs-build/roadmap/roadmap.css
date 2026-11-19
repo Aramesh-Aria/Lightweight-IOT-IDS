@@ -1,0 +1,47 @@
+/* Study roadmap: extends guide.css (same cover, chapter and table look). */
+@page {
+  @top-left { content: "LIGHTWEIGHT IoT INTRUSION DETECTION · STUDY ROADMAP"; }
+}
+body { string-set: short "برنامه‌ی مطالعه · آمادگی ارائه"; }
+
+/* cover timeline */
+.cv-weeks { display: grid; grid-template-columns: repeat(4, 1fr) 1.3fr; gap: 3mm; margin-top: 14mm; }
+.cv-wk { border-top: 2pt solid var(--teal); padding-top: 2.5mm; }
+.cv-wk.o { border-top-color: var(--orange-l); }
+.cv-wk .n { font-family: "Instrument Sans"; font-weight: 700; font-size: 6.6pt; letter-spacing: .22em; color: var(--teal-l); direction: ltr; text-align: right; }
+.cv-wk.o .n { color: var(--orange-l); }
+.cv-wk .t { font-weight: 800; font-size: 11pt; margin-top: 1mm; }
+.cv-wk .d { font-size: 8pt; color: #c5ccd8; line-height: 1.7; margin-top: 1mm; }
+
+/* overview */
+.lead { font-size: 10.4pt; line-height: 1.95; }
+.rules { counter-reset: r; margin: 2mm 0 4mm; padding: 0; list-style: none; }
+.rules li { counter-increment: r; position: relative; padding: 1.6mm 9mm 1.6mm 0; border-bottom: .5pt solid var(--rule-l); font-size: 9.2pt; }
+.rules li::before { content: counter(r, persian); position: absolute; right: 0; top: 1.2mm; font-weight: 900; font-size: 12pt; color: var(--green); }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 6mm; margin: 2mm 0 4mm; }
+.file { display: flex; gap: 3mm; align-items: baseline; font-size: 8.6pt; line-height: 1.6; padding: 1.2mm 0; border-bottom: .5pt dashed var(--rule); }
+.file code { flex: none; }
+
+/* week table */
+table.plan td { text-align: right; vertical-align: top; }
+table.plan td.day { width: 15mm; font-weight: 800; color: var(--green); text-align: center; white-space: nowrap; }
+table.plan td.src { width: 46mm; font-size: 7.8pt; color: var(--gray-d); }
+table.plan td.test { width: 52mm; font-size: 8pt; color: var(--brown); background: var(--orange-soft); }
+table.plan th.test { background: var(--orange); }
+table.plan tr.rest td { background: var(--green-soft) !important; color: var(--green); }
+table.plan { break-inside: auto; }
+table.plan tr { break-inside: avoid; }
+
+.goal { display: flex; gap: 4mm; align-items: flex-start; background: #fff; border: .6pt solid var(--rule-l); border-right: 2.4pt solid var(--green); padding: 2.6mm 4mm; margin: 0 0 4mm; font-size: 9pt; break-inside: avoid; }
+.goal b { color: var(--green); flex: none; }
+.goal.o { border-right-color: var(--orange); }
+.goal.o b { color: var(--orange); }
+
+/* checklist */
+.check { list-style: none; margin: 1mm 0 4mm; padding: 0; columns: 2; column-gap: 8mm; }
+.check li { break-inside: avoid; position: relative; padding: 1mm 6mm 1mm 0; font-size: 8.7pt; line-height: 1.7; }
+.check li::before { content: ""; position: absolute; right: 0; top: 2.4mm; width: 3.2mm; height: 3.2mm; border: .9pt solid var(--green); border-radius: .6mm; }
+.check.one { columns: 1; }
+
+/* checkpoint title is an h2 (no skipped heading level); keep the summary-box look */
+.sm-head h2 { margin: 0; padding: 0; border: 0; font-weight: 800; font-size: 12pt; line-height: 1.4; }

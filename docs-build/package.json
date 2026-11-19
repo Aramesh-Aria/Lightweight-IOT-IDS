@@ -9,7 +9,9 @@
     "slides": "node scripts/build-slides.mjs",
     "slides:review": "node scripts/build-slides.mjs --png",
     "guide": "node scripts/build-guide.mjs",
-    "guide:review": "node scripts/build-guide.mjs --png"
+    "guide:review": "node scripts/build-guide.mjs --png",
+    "roadmap": "node scripts/build-roadmap.mjs",
+    "roadmap:review": "node scripts/build-roadmap.mjs --png"
   },
   "license": "UNLICENSED",
   "dependencies": {
